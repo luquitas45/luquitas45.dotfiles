@@ -1,0 +1,7 @@
+[Desktop Entry]
+Exec=/usr/bin/kitty -e /bin/sh -c 'cd /home/lucas/Documentos/atajos && glow; read -p "Enter para cerrar" _'
+Name=Abrir hoja de atajos
+NoDisplay=true
+StartupNotify=false
+Type=Application
+X-KDE-GlobalAccel-CommandShortcut=true
