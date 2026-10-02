@@ -9,6 +9,7 @@ Configuración del entorno de `lucas` (CachyOS + KDE Plasma):
 - **nvim** — LazyVim 16 con extras (picker, markdown/json/yaml/typescript, prettier), yazi.nvim y navegación tmux↔nvim
 - **pi** — tema Gorgoroth para Pi
 - **kde** — atajo global Meta+H → hojas de atajos (glow)
+- **atajos/** — las hojas de atajos (`~/Documentos/atajos`, linkeadas como carpeta: nueva hoja = se versiona sola)
 
 ## Instalación
 

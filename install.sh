@@ -16,6 +16,7 @@ LINKS=(
   "config/yazi/theme.toml|$HOME/.config/yazi/theme.toml"
   "pi/agent/themes/gorgoroth.json|$HOME/.pi/agent/themes/gorgoroth.json"
   "kde/net.local.kitty.desktop|$HOME/.local/share/applications/net.local.kitty.desktop"
+  "atajos|$HOME/Documentos/atajos"
 )
 
 # nvim is linked as a whole directory (its content grows)
