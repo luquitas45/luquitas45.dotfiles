@@ -37,5 +37,5 @@ archivos reales: si un destino existe sin ser symlink, avisa y sale.
   de Meta+H del KDE global-shortcut). Ajustar si cambia el usuario.
 - Los plugins de nvim viven en `~/.local/share/nvim` (fuera del repo); acá
   solo la configuración.
-- Las hojas de atajos (`~/Documentos/atajos/*.md`) y la documentación
-  extendida se agregan en una fase posterior.
+- `~/Documentos/atajos/` es un symlink a `atajos/` del repo: las hojas de
+  atajos (accesibles con Meta+H → glow) se versionan junto con el resto.
