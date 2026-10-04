@@ -211,7 +211,7 @@
        d="M 0,0 V 1 H 32 V 0 Z"
        id="path1337"
        class="ColorScheme-Background"
-       fill="#3a4149" />
+       fill="currentColor" />
   </g>
   <g
      id="bottom"
@@ -229,7 +229,7 @@
        d="M 0,5 V 6 H 32 V 5 Z"
        id="path1671"
        class="ColorScheme-Background"
-       fill="#3a4149" />
+       fill="currentColor" />
   </g>
   <g
      id="left"
@@ -247,7 +247,7 @@
        d="M 0,32 H 1 V 0 H 0 Z"
        id="path1785"
        class="ColorScheme-Background"
-       fill="#3a4149" />
+       fill="currentColor" />
   </g>
   <g
      id="right"
@@ -265,7 +265,7 @@
        d="M 5,32 H 6 V 0 H 5 Z"
        id="path1902"
        class="ColorScheme-Background"
-       fill="#3a4149" />
+       fill="currentColor" />
   </g>
   <g
      id="center"
