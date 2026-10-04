@@ -248,11 +248,10 @@
        x="0"
        y="0" />
     <path
-       style="opacity:0.5;fill:currentColor"
+       style="opacity:1"
        d="M 0,0 V 1 H 32 V 0 Z"
        id="path1337"
-       class="ColorScheme-Background"
-       fill="currentColor" />
+       fill="#5f8787" />/>
   </g>
   <g
      id="bottom"
@@ -266,11 +265,10 @@
        x="0"
        y="0" />
     <path
-       style="opacity:0.85;fill:currentColor"
+       style="opacity:1"
        d="M 0,5 V 6 H 32 V 5 Z"
        id="path1671"
-       class="ColorScheme-Background"
-       fill="currentColor" />
+       fill="#5f8787" />/>
   </g>
   <g
      id="left"
@@ -284,11 +282,10 @@
        x="0"
        y="0" />
     <path
-       style="opacity:0.85;fill:currentColor"
+       style="opacity:1"
        d="M 0,32 H 1 V 0 H 0 Z"
        id="path1785"
-       class="ColorScheme-Background"
-       fill="currentColor" />
+       fill="#5f8787" />/>
   </g>
   <g
      id="right"
@@ -302,11 +299,10 @@
        x="0"
        y="0" />
     <path
-       style="opacity:0.85;fill:currentColor"
+       style="opacity:1"
        d="M 5,32 H 6 V 0 H 5 Z"
        id="path1902"
-       class="ColorScheme-Background"
-       fill="currentColor" />
+       fill="#5f8787" />/>
   </g>
   <g
      id="center"
