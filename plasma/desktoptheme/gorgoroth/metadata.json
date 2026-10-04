@@ -1,0 +1,19 @@
+{
+    "KPlugin": {
+        "Authors": [
+            {
+                "Email": "lucas@local",
+                "Name": "lucas"
+            }
+        ],
+        "Category": "",
+        "Description": "Gorgoroth — Black Metal theme for Plasma, derived from Breeze Dark",
+        "EnabledByDefault": false,
+        "Id": "gorgoroth",
+        "License": "LGPL",
+        "Name": "Gorgoroth",
+        "Version": "1.0.0",
+        "Website": "https://github.com/luquitas45/luquitas45.dotfiles"
+    },
+    "X-Plasma-API": "5.0"
+}
