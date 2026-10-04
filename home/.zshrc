@@ -51,3 +51,12 @@ autoload -Uz add-zsh-hook
 add-zsh-hook precmd _restore_beam
 _restore_beam() { printf '\e[6 q' }
 
+# ── Gorgoroth: LS_COLORS + fzf ── (10-oct: paleta del tema, sync con yazi)
+export LS_COLORS="no=\e[0m:fi=\e[38;2;193;193;193m:di=\e[38;2;136;136;136m:ln=\e[38;2;221;238;204m:ex=\e[38;2;170;170;170m:pi=\e[38;2;95;135;135m:so=\e[38;2;95;135;135m:bd=\e[38;2;136;136;136m:cd=\e[38;2;136;136;136m:or=\e[38;2;95;135;135m:mi=\e[38;2;95;135;135m:tw=\e[1;38;2;136;136;136m:ow=\e[38;2;95;135;135m:st=\e[1;38;2;136;136;136m:*.tar=\e[38;2;95;135;135m:*.tgz=\e[38;2;95;135;135m:*.gz=\e[38;2;95;135;135m:*.bz2=\e[38;2;95;135;135m:*.tbz=\e[38;2;95;135;135m:*.xz=\e[38;2;95;135;135m:*.7z=\e[38;2;95;135;135m:*.zip=\e[38;2;95;135;135m:*.rar=\e[38;2;95;135;135m:*.zst=\e[38;2;95;135;135m:*.iso=\e[38;2;95;135;135m:*.png=\e[38;2;155;141;127m:*.jpg=\e[38;2;155;141;127m:*.jpeg=\e[38;2;155;141;127m:*.gif=\e[38;2;155;141;127m:*.svg=\e[38;2;155;141;127m:*.webp=\e[38;2;155;141;127m:*.mp4=\e[38;2;221;238;204m:*.mkv=\e[38;2;221;238;204m:*.webm=\e[38;2;221;238;204m:*.mp3=\e[38;2;221;238;204m:*.flac=\e[38;2;221;238;204m:*.wav=\e[38;2;221;238;204m"
+
+export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS
+--color=fg:#c1c1c1,bg:#000000,hl:#9b8d7f,gutter:#000000
+--color=fg+:#c1c1c1,bg+:#000000,hl+:#9b8d7f
+--color=info:#505050,prompt:#9b8d7f,pointer:#c1c1c1
+--color=marker:#999999,spinner:#999999,header:#999999"
+
