@@ -17,6 +17,7 @@ LINKS=(
   "pi/agent/themes/gorgoroth.json|$HOME/.pi/agent/themes/gorgoroth.json"
   "kde/net.local.kitty.desktop|$HOME/.local/share/applications/net.local.kitty.desktop"
   "plasma/desktoptheme/gorgoroth|$HOME/.local/share/plasma/desktoptheme/gorgoroth"
+  "kde/plasmoids/io.github.daydve.fancytasksng|$HOME/.local/share/plasma/plasmoids/io.github.daydve.fancytasksng"
   "atajos|$HOME/Documentos/atajos"
   "curso-js/vault|$HOME/alejandria/js-curso-jonmircha"
 )
