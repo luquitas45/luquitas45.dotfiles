@@ -247,11 +247,7 @@
        width="32"
        x="0"
        y="0" />
-    <path
-       style="opacity:1"
-       d="M 0,0 V 2 H 32 V 0 Z"
-       id="path1337"
-       fill="#5f8787" />/>
+    />
   </g>
   <g
      id="bottom"
@@ -264,11 +260,7 @@
        width="32"
        x="0"
        y="0" />
-    <path
-       style="opacity:1"
-       d="M 0,4 V 6 H 32 V 4 Z"
-       id="path1671"
-       fill="#5f8787" />/>
+    />
   </g>
   <g
      id="left"
@@ -281,11 +273,7 @@
        width="6"
        x="0"
        y="0" />
-    <path
-       style="opacity:1"
-       d="M 0,32 H 2 V 0 H 0 Z"
-       id="path1785"
-       fill="#5f8787" />/>
+    />
   </g>
   <g
      id="right"
@@ -298,11 +286,7 @@
        width="6"
        x="0"
        y="0" />
-    <path
-       style="opacity:1"
-       d="M 4,32 H 6 V 0 H 4 Z"
-       id="path1902"
-       fill="#5f8787" />/>
+    />
   </g>
   <g
      id="center"
