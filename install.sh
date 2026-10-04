@@ -18,7 +18,6 @@ LINKS=(
   "kde/net.local.kitty.desktop|$HOME/.local/share/applications/net.local.kitty.desktop"
   "plasma/desktoptheme/gorgoroth|$HOME/.local/share/plasma/desktoptheme/gorgoroth"
   "kde/plasmoids/io.github.daydve.fancytasksng|$HOME/.local/share/plasma/plasmoids/io.github.daydve.fancytasksng"
-  "kde/plasmoids/org.kde.plasma.digitalclock|$HOME/.local/share/plasma/plasmoids/org.kde.plasma.digitalclock"
   "atajos|$HOME/Documentos/atajos"
   "curso-js/vault|$HOME/alejandria/js-curso-jonmircha"
 )
