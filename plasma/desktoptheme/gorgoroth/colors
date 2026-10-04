@@ -97,7 +97,7 @@ ForegroundVisited=155,141,127
 
 [Colors:Window]
 BackgroundAlternate=42,35,37
-BackgroundNormal=34,34,34
+BackgroundNormal=0,0,0
 ForegroundInactive=80,80,80
 ForegroundLink=170,170,170
 ForegroundNegative=95,135,135
