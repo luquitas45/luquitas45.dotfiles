@@ -1,0 +1,8 @@
+#!/bin/sh
+# Muestra el tiempo activo de la sesión de tmux actual: Dd HH:MM:SS
+# Usado en status-right via sustitución #(...)
+c=$(tmux display-message -p '#{session_created}' 2>/dev/null) || exit 0
+[ -n "$c" ] && [ "$c" -eq "$c" ] 2>/dev/null || exit 0
+d=$(($(date +%s) - c))
+[ "$d" -lt 0 ] && exit 0
+printf '%dd %02d:%02d:%02d' $((d/86400)) $(((d%86400)/3600)) $(((d%3600)/60)) $((d%60))
