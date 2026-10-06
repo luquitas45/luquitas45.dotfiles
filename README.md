@@ -10,6 +10,7 @@ Configuración del entorno de `lucas` (CachyOS + KDE Plasma):
 - **pi** — tema Gorgoroth para Pi
 - **kde** — atajo global Meta+H → hojas de atajos (glow)
 - **atajos/** — las hojas de atajos (`~/Documentos/atajos`, linkeadas como carpeta: nueva hoja = se versiona sola)
+- **curso-js/** — curso de JavaScript de Jon Mircha: vault de Obsidian (`~/alejandria/js-curso-jonmircha`, linkeado), ejercicios de práctica, skill del flujo Pi y memoria exportada
 
 ## Instalación
 

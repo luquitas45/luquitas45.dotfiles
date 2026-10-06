@@ -17,6 +17,7 @@ LINKS=(
   "pi/agent/themes/gorgoroth.json|$HOME/.pi/agent/themes/gorgoroth.json"
   "kde/net.local.kitty.desktop|$HOME/.local/share/applications/net.local.kitty.desktop"
   "atajos|$HOME/Documentos/atajos"
+  "curso-js/vault|$HOME/alejandria/js-curso-jonmircha"
 )
 
 # nvim is linked as a whole directory (its content grows)
