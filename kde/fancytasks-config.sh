@@ -43,19 +43,18 @@ set_key buttonColorizeDominant false      # color fijo, no el dominante del icon
 set_key buttonColorizeCustom "#222222"    # fondo de boton real de la paleta (Colors:Button)
 set_key buttonColorizeInactive true       # mismo color para las inactivas
 set_key groupingStrategy 0
-set_key indicatorActiveSize 4
+set_key indicatorActiveSize 3
 set_key indicatorAlignment 2             # cross-axis alignment: inner
-set_key indicatorDimInactive true
 set_key indicatorInactiveOpacity 60
 set_key indicatorOverride true
 set_key indicatorProgressStyle 0
-set_key indicatorResize false
 set_key indicatorSize 2
 set_key indicatorsEnabled 1
 set_key indicatorLocation 1              # 0=Top 1=Bottom 2=Left 3=Right
+set_key indicatorLength 12               # longitud del indicador (tu ajuste a mano)
 set_key taskHoverEffect false
 set_key taskHoverEffectStyle 1
-set_key useBorders true
+set_key useBorders false
 set_key launchers "applications:systemsettings.desktop,preferred://filemanager"
 
 echo "Done. Restart plasmashell (or log out/in) to apply:"
