@@ -28,13 +28,25 @@ fi
 GROUP="Containments][$CONT][Applets][$APPLET][Configuration][General"
 echo "Applying FancyTasks config to containment $CONT, applet $APPLET"
 
-set_key() { kwriteconfig6 --file plasma-org.kde.plasma.desktop-appletsrc --group "$GROUP" --key "$1" "$2"; }
+# kwriteconfig6 needs the nested group as repeated --group flags
+set_key() {
+  kwriteconfig6 --file plasma-org.kde.plasma.desktop-appletsrc \
+    --group Containments --group "$CONT" --group Applets --group "$APPLET" \
+    --group Configuration --group General \
+    --key "$1" "$2"
+}
 
-set_key disableButtonInactiveSvg true     # no backgrounds on inactive buttons
+set_key disableButtonInactiveSvg false    # mostrar fondo tambien en inactivos
+set_key disableButtonSvg false            # usar el SVG de fondo del tema
+set_key buttonColorize true               # colorear el fondo de las apps abiertas
+set_key buttonColorizeDominant false      # color fijo, no el dominante del icono
+set_key buttonColorizeCustom "#222222"    # fondo de boton real de la paleta (Colors:Button)
+set_key buttonColorizeInactive true       # mismo color para las inactivas
 set_key groupingStrategy 0
 set_key indicatorActiveSize 4
 set_key indicatorAlignment 2             # cross-axis alignment: inner
 set_key indicatorDimInactive true
+set_key indicatorInactiveOpacity 60
 set_key indicatorOverride true
 set_key indicatorProgressStyle 0
 set_key indicatorResize false
@@ -43,8 +55,11 @@ set_key indicatorsEnabled 1
 set_key indicatorLocation 1              # 0=Top 1=Bottom 2=Left 3=Right
 set_key taskHoverEffect false
 set_key taskHoverEffectStyle 1
-set_key useBorders false
+set_key useBorders true
 set_key launchers "applications:systemsettings.desktop,preferred://filemanager"
 
 echo "Done. Restart plasmashell (or log out/in) to apply:"
 echo "  plasmashell --replace &"
+set_key indicatorAccentColor false          # desactivar acento en el indicador
+set_key indicatorDominantColor false
+set_key indicatorCustomColor "#c1c1c1"      # indicador activo en claro (tmux)
