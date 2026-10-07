@@ -2,6 +2,9 @@
 
 Qué versiona el repo para la sesión Plasma y cómo se aplica.
 
+> Instalación en una máquina nueva (paquetes, pasos manuales, rollback):
+> [`docs/install-cachyos.md`](../docs/install-cachyos.md).
+
 ## Componentes
 
 | Componente | En el repo | Linkeado a |

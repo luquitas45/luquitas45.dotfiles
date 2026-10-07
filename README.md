@@ -14,14 +14,19 @@ Configuración del entorno de `lucas` (CachyOS + KDE Plasma):
 
 ## Instalación
 
+Guía completa (paquetes, pasos manuales, rollback): [`docs/install-cachyos.md`](docs/install-cachyos.md).
+
 ```bash
 cd ~/dotfiles
-bash install.sh
+bash install.sh                # symlinks (idempotente, nunca pisa archivos reales)
+bash kde/apply-gorgoroth.sh    # tema global + Kvantum + panel + blur, después relogin
 ```
 
-El script crea **symlinks** desde el repo hacia `$HOME` (el repo es la única
-fuente: editar la config real edita el repo). Es idempotente y nunca pisa
-archivos reales: si un destino existe sin ser symlink, avisa y sale.
+El primer script crea **symlinks** desde el repo hacia `$HOME` (el repo es la
+única fuente: editar la config real edita el repo). Arma el plan completo antes
+crear nada y es **all-or-nothing**: si un destino existe sin ser symlink, lista
+todos los conflictos con la receta para resolverlos y no crea ningún link.
+`bash install.sh --check` sólo imprime el plan.
 
 ## Agregar una config nueva
 
@@ -34,9 +39,10 @@ archivos reales: si un destino existe sin ser symlink, avisa y sale.
 
 - `config/nvim/` se linkea como **directorio completo** (su contenido crece;
   lazy.nvim escribe `lazy-lock.json` ahí con cada update).
-- `kde/net.local.kitty.desktop` embebe rutas absolutas de `lucas` (el wrapper
-  de Meta+H del KDE global-shortcut). Ajustar si cambia el usuario.
 - Los plugins de nvim viven en `~/.local/share/nvim` (fuera del repo); acá
   solo la configuración.
 - `~/Documentos/atajos/` es un symlink a `atajos/` del repo: las hojas de
   atajos (accesibles con Meta+H → glow) se versionan junto con el resto.
+- `Meta+H` funciona con cualquier home: el `.desktop` expande `$HOME` en runtime.
+- `scripts/check-portable.sh` falla si un archivo machine-read hardcodea
+  `/home/<usuario>`.
