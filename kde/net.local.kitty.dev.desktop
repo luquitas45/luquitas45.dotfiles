@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Name=Kitty Dev (tmux)
+Comment=Terminal de desarrollo con tmux
+Exec=/usr/bin/kitty --class devkitty --title Dev tmux new-session -A -s dev
+Icon=utilities-terminal
+Terminal=false
+StartupNotify=false
+X-GNOME-Autostart-enabled=true
+Categories=System;TerminalEmulator;

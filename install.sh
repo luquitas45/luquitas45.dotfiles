@@ -34,6 +34,8 @@ LINKS=(
   "config/yazi/theme.toml|$HOME/.config/yazi/theme.toml"
   "pi/agent/themes/gorgoroth.json|$HOME/.pi/agent/themes/gorgoroth.json"
   "kde/net.local.kitty.desktop|$HOME/.local/share/applications/net.local.kitty.desktop"
+  "kde/net.local.kitty.dev.desktop|$HOME/.local/share/applications/net.local.kitty.dev.desktop"
+  "kde/net.local.kitty.dev.desktop|$HOME/.config/autostart/net.local.kitty.dev.desktop"
   "plasma/desktoptheme/gorgoroth|$HOME/.local/share/plasma/desktoptheme/gorgoroth"
   "plasma/colorschemes/Gorgoroth.colors|$HOME/.local/share/color-schemes/Gorgoroth.colors"
   "kde/plasmoids/io.github.daydve.fancytasksng|$HOME/.local/share/plasma/plasmoids/io.github.daydve.fancytasksng"
