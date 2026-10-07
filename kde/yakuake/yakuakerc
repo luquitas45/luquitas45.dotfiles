@@ -8,6 +8,6 @@ DefaultProfile=Kitty.profile
 FirstRun=false
 
 [Window]
-Height=82
+Height=63
 KeepOpen=false
 ShowTabBar=false
