@@ -1,5 +1,5 @@
 [Appearance]
-ColorScheme=KittyMonochrome
+ColorScheme=Gorgoroth
 
 [General]
 Command=/usr/bin/tmux new-session -A -s main

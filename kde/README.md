@@ -16,6 +16,8 @@ Qué versiona el repo para la sesión Plasma y cómo se aplica.
 | Aurorae (decoración de ventanas) | `kde/aurorae/` | `~/.local/share/aurorae/themes/*` |
 | FancyTasksNG (taskbar) | `kde/plasmoids/io.github.daydve.fancytasksng` | `~/.local/share/plasma/plasmoids/…` |
 | Panel / taskbar | `kde/fancytasks-panel.md` | — |
+| Yakuake (terminal desplegable) | `kde/yakuake/` | `~/.config/yakuakerc`, `~/.local/share/yakuake/skins/*` |
+| Konsole (perfil + schemes) | `kde/konsole/` | `~/.local/share/konsole/{Kitty.profile,*.colorscheme}` |
 
 ## Iconos
 
@@ -37,6 +39,47 @@ tienen azul de Breeze** (`#3daee6`/`#93cee9`) — `osd.svg` completo (36
 ocurrencias) y 2 en cada uno de otros 28. Pendiente: extender la recoloración a
 estos SVG con su propio `palette.map` + `recolor.sh` + `verify.sh`, igual que
 Kvantum y Aurorae.
+
+## Yakuake y Konsole
+
+El terminal desplegable y su paleta, versionados y derivados de la misma fuente
+que kitty (`config/kitty/black-metal-gorgoroth.conf`).
+
+| Pieza | Origen (vendored) | Derivado | Verify |
+|---|---|---|---|
+| Skin de Yakuake | `kde/yakuake/skins/upstream-monochrome/` | `kde/yakuake/skins/Gorgoroth/` | `kde/yakuake/verify.sh` |
+| Scheme de Konsole | `kde/konsole/colorschemes/KittyMonochrome.colorscheme` | `kde/konsole/colorschemes/Gorgoroth.colorscheme` | `kde/konsole/colorschemes/verify.sh` |
+
+Detalles de cada formato:
+
+- La skin de Yakuake es del **formato viejo** (sin metadata): `title.skin` y
+  `tabs.skin` con geometría, rutas a SVG y el color de texto **por componente**
+  (`red=170 green=170 blue=172`). El recolor toca los hex de los SVG, esos tres
+  componentes, y aplica un override a `tabs/tab_selected.svg` para que la
+  pestaña activa lleve el teal `#5f8787`.
+- El scheme de Konsole se **genera por sección**, no por sustitución de valores:
+  el Monochrome usa el mismo triplet (`30,30,32`) en `[Background]` y `[Color0]`,
+  que deben terminar en valores distintos. Cada slot sale de kitty
+  (`[ColorN]` = slot normal, `[ColorNIntense]` = bright) y `verify.sh` compara
+  los 16 slots + background/foreground contra el conf de kitty, así los dos
+  terminales no pueden divergir.
+
+Aplicar (los dos archivos son symlinks del repo, así que el cambio aplica solo):
+
+```bash
+# Skin de Yakuake
+kwriteconfig6 --file yakuakerc --group Appearance --key Skin gorgoroth
+# Scheme del perfil que usa Yakuake
+kwriteconfig6 --file ~/.local/share/konsole/Kitty.profile --group Appearance --key ColorScheme Gorgoroth
+# Yakuake 26.08 no expone reload por DBus: reiniciar (las sesiones tmux sobreviven)
+kill $(pgrep -x yakuake | head -1); setsid yakuake >/dev/null 2>&1 &
+```
+
+El reinicio es seguro porque el perfil corre `tmux new-session -A -s main`: el
+server de tmux es un proceso aparte y Yakuake se reengancha al volver.
+
+Rollback: `Skin=monochrome` + `ColorScheme=KittyMonochrome` y reiniciar (los dos
+siguen vendorizados).
 
 ## Aplicar
 

@@ -15,6 +15,7 @@ El repo versiona todo el look; lo que queda afuera son tres pasos manuales
 | `kitty`, `tmux`, `zsh`, `yazi`, `neovim`, `fzf` | Terminal y shell |
 | `ttf-meslo-nerd` | Fuente de kitty (`MesloLGS Nerd Font Mono`) y glifos del status de tmux / p10k |
 | `cachyos-zsh-config` | oh-my-zsh + powerlevel10k del sistema (`/usr/share/cachyos-zsh-config`) |
+| `yakuake` | Terminal desplegable; su skin y el perfil de Konsole que usa están versionados |
 | `zoxide` | `z` (salto rápido a directorios) |
 | `glow` | Hojas de atajos del atajo global `Meta+H` |
 
