@@ -17,6 +17,17 @@
 
 ---
 
+## 🖥️ Escritorios virtuales
+
+| Qué hace | Atajo |
+|---|---|
+| Ir al escritorio 1 · **Principal** | `Meta+Z` |
+| Ir al escritorio 2 · **Desarrollo** | `Meta+X` |
+
+> Se crean y bindean con `bash kde/apply-desktops.sh` (idempotente, verifica el readback).
+
+---
+
 ## 🧰 Clásicos de Plasma (defaults)
 
 | Qué hace | Atajo |
