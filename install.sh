@@ -56,6 +56,7 @@ LINKS=(
   "kde/konsole/colorschemes/KittyMonochrome.colorscheme|$HOME/.local/share/konsole/KittyMonochrome.colorscheme"
   "kde/konsole/colorschemes/Monochrome.colorscheme|$HOME/.local/share/konsole/Monochrome.colorscheme"
   "kde/konsole/colorschemes/Gorgoroth.colorscheme|$HOME/.local/share/konsole/Gorgoroth.colorscheme"
+  "kde/autostart/org.kde.yakuake.desktop|$HOME/.config/autostart/org.kde.yakuake.desktop"
   "atajos|$HOME/Documentos/atajos"
   "curso-js/vault|$HOME/alejandria/js-curso-jonmircha"
 )
