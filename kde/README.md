@@ -75,34 +75,27 @@ duplica escritorios ni falla si ya está todo aplicado.
 ## Kitty dev (tmux) en Desarrollo
 
 Un segundo kitty dedicado a desarrollo: abre (o adjunta) la sesión tmux `dev`
-con `tmux new-session -A -s dev`, arranca solo al login vía autostart y una
-regla de KWin lo fuerza al escritorio **Desarrollo**, sin borde. No toca
-`kitty.conf`: todo va por línea de comandos (`--class devkitty`) y por regla de
-ventana, así que el kitty normal sigue abriendo un shell pelado.
+con `tmux new-session -A -s dev` y arranca solo al login. No toca `kitty.conf`:
+todo va por línea de comandos (`--class devkitty`), así que el kitty normal
+sigue abriendo un shell pelado.
 
-La ventana queda **visible** en Desarrollo, pero ya no te arrastra allí al
-loguéate: son dos mecanismos en paralelo. La regla KWin le pone
-`fsplevel=4`/`fsplevelrule=2` (Focus stealing prevention en *Extreme*), que
-**niega** la petición de foco y evita que KWin siga a la ventana al otro
-escritorio; y el `.desktop` ejecuta el wrapper `kde/dev-kitty.sh`, que se
-acuerda del escritorio activo antes del lanzamiento, deja mapear la ventana y
-lo devuelve a donde estaba. `install.sh` linkea el wrapper en
-`~/.local/bin/dev-kitty`.
+La ventana queda **visible en Desarrollo sin arrastrarte allí**. El disparador es
+`kde/dev-kitty.sh` (linkeado a `~/.local/bin/dev-kitty` y usado como `Exec` del
+`.desktop`):
 
-```bash
-bash kde/apply-dev-kitty.sh   # crea/actualiza la regla y verifica el readback
-```
+1. lanza `kitty --class devkitty --title Dev tmux new-session -A -s dev` en el
+escritorio actual, y
+2. carga `kde/devkitty-to-desarrollo.js` como KWin script (una vez por sesión),
+que mueve **toda** ventana `devkitty` al escritorio Desarrollo y la deja sin borde.
 
-El script lee el UUID del escritorio Desarrollo en runtime por D-Bus (nada
-hardcodeado) y escribe la regla en la ruta real del repo:
-`~/.config/kwinrulesrc` es un symlink y `kwriteconfig6` escribe con tmp+rename,
-así que apuntar al symlink lo reemplazaría con un archivo real — el script
-verifica después que el symlink siga intacto. Idempotente: localiza la regla
-por `wmclass=devkitty` (o por su `Description`) y la actualiza en el sitio;
-sólo la agrega si no existe, manteniendo `[General] count`/`rules` consistentes.
+**Por qué un KWin script y no una regla de ventana**: una regla que *fuerza* el
+escritorio hace que KWin **siga** la ventana nueva a Desarrollo (te roba el
+escritorio al loguearte). Mover la ventana **después** de creada no cambia el
+escritorio actual — verificado en vivo. Además las reglas de KWin sólo cargan al
+iniciar KWin y una clave inválida puede descartar el archivo entero, así que no
+dependemos de ellas para esto.
 
-Si la regla se acaba de crear, un re-login asegura que KWin la cargue y la
-aplique a las ventanas nuevas.
+`~/.config/kwinrulesrc` conserva sólo la regla `[1]` (kitty común, sin borde).
 
 ## Kvantum: recolor determinista
 

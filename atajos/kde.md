@@ -35,13 +35,10 @@
 | Terminal de desarrollo con tmux (sesión `dev`, la adjunta si ya existe) | Arranca sola al login · escritorio **Desarrollo**, sin borde |
 | Lanzarla a mano | Menú de apps → **Kitty Dev (tmux)** |
 
-> Regla KWin (`wmclass=devkitty` → Desarrollo + sin borde + `fsplevel=4`/`fsplevelrule=2`,
-> Focus stealing prevention *Extreme* que niega el foco para que KWin no siga la
-> ventana al otro escritorio): `bash kde/apply-dev-kitty.sh` (idempotente, lee el UUID
-> del escritorio en runtime y verifica el readback).
-> El `.desktop` ejecuta el wrapper `kde/dev-kitty.sh` (`~/.local/bin/dev-kitty`), que
-> devuelve el escritorio activo al que tenías antes del lanzamiento: la ventana queda
-> visible en Desarrollo sin arrastrarte allí.
+> Sin reglas de ventana: el `.desktop` ejecuta el wrapper `kde/dev-kitty.sh`
+> (`~/.local/bin/dev-kitty`), que lanza kitty y carga el KWin script
+> `kde/devkitty-to-desarrollo.js`: mueve la ventana `devkitty` a Desarrollo y la
+> deja sin borde **sin cambiar el escritorio activo** (una regla sí lo cambiaría).
 > El kitty normal NO abre tmux: es un `.desktop` aparte, `kitty.conf` no se toca.
 
 ---
