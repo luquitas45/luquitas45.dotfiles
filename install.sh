@@ -49,6 +49,13 @@ LINKS=(
   "kde/kvantum/Gorgoroth|$HOME/.config/Kvantum/Gorgoroth"
   "kde/kvantum/GorgorothBlur|$HOME/.config/Kvantum/GorgorothBlur"
   "kde/kvantum/GorgorothSolid|$HOME/.config/Kvantum/GorgorothSolid"
+  "kde/yakuake/yakuakerc|$HOME/.config/yakuakerc"
+  "kde/yakuake/skins/upstream-monochrome|$HOME/.local/share/yakuake/skins/monochrome"
+  "kde/yakuake/skins/Gorgoroth|$HOME/.local/share/yakuake/skins/gorgoroth"
+  "kde/konsole/Kitty.profile|$HOME/.local/share/konsole/Kitty.profile"
+  "kde/konsole/colorschemes/KittyMonochrome.colorscheme|$HOME/.local/share/konsole/KittyMonochrome.colorscheme"
+  "kde/konsole/colorschemes/Monochrome.colorscheme|$HOME/.local/share/konsole/Monochrome.colorscheme"
+  "kde/konsole/colorschemes/Gorgoroth.colorscheme|$HOME/.local/share/konsole/Gorgoroth.colorscheme"
   "atajos|$HOME/Documentos/atajos"
   "curso-js/vault|$HOME/alejandria/js-curso-jonmircha"
 )

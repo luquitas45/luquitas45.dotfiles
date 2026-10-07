@@ -1,0 +1,13 @@
+[Appearance]
+Skin=monochrome
+
+[Desktop Entry]
+DefaultProfile=Kitty.profile
+
+[Dialogs]
+FirstRun=false
+
+[Window]
+Height=82
+KeepOpen=false
+ShowTabBar=false

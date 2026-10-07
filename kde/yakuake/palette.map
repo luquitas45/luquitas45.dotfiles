@@ -1,0 +1,27 @@
+# Yakuake skin recolor map: Monochrome (Patrik Wyde) -> Gorgoroth.
+#
+# Format: <old-hex> <new-hex>   # role
+# Consumed by:
+#   recolor.sh -> hex substitution over the SVGs and, derived from the same
+#                 pairs, RGB-triplet substitution over title.skin/tabs.skin
+#   verify.sh  -> fails if a non-identity old hex or triplet survives
+#
+# Rules:
+#   - identity pairs (old == new) are never substituted and never flagged
+#   - tabs/tab_selected.svg gets a file-scoped extra pass in recolor.sh: its
+#     mapped foreground (#c1c1c1) becomes the teal accent #5f8787, so the active
+#     tab carries the accent like the panel indicator and the Kvantum highlight
+#
+# Gorgoroth ladder: 000000 bg · c1c1c1 foreground · 888888 mids · 505050 dim
+# 8a4f4f negative · 6b3d3d negative hover · 5f8787 teal accent.
+
+1e1e20 000000   # title + tab background
+aaaaac c1c1c1   # text (title.skin/tabs.skin: 170,170,172 -> 193,193,193)
+ffffff c1c1c1   # glyphs and tab borders (tab_selected gets teal instead)
+6e6e70 888888   # mid gray
+666666 888888   # mid gray (logo)
+4f4f4f 505050   # dim (logo)
+da4453 8a4f4f   # negative
+da4452 8a4f4f   # negative
+b43c48 6b3d3d   # negative hover (keeps the press feedback distinct)
+000000 000000   # identity: pure black
