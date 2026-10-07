@@ -81,6 +81,10 @@ $EDITOR kde/kvantum/palette.map && bash kde/kvantum/recolor.sh && bash kde/kvant
 
 # Aurorae -> decoración Gorgoroth (hex en los SVG + tripletas RGB en el .rc)
 $EDITOR kde/aurorae/palette.map && bash kde/aurorae/recolor.sh && bash kde/aurorae/verify.sh
+
+# Iconos del shell (Plasma desktop theme): restos de Breeze -> paleta
+# (migración en el lugar; incluye el bloque inerte de placeholders)
+bash kde/plasma-icons/recolor.sh && bash kde/plasma-icons/verify.sh
 ```
 
 `verify.sh` falla si queda un color de la paleta vieja. Detalles de cada mapeo

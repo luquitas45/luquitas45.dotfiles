@@ -15,8 +15,8 @@
    sodipodi:docname="network.svgz"
    inkscape:version="0.92.2 5c3e80d, 2017-08-06">
   <sodipodi:namedview
-     pagecolor="#ffffff"
-     bordercolor="#666666"
+     pagecolor="#c1c1c1"
+     bordercolor="#888888"
      borderopacity="1"
      objecttolerance="10"
      gridtolerance="10"
@@ -58,34 +58,34 @@
        id="current-color-scheme"
        type="text/css">
       .ColorScheme-Text {
-        color:#31363b;
+        color:#222222;
       }
       .ColorScheme-Background {
-        color:#eff0f1;
+        color:#c1c1c1;
       }
       .ColorScheme-Highlight {
         color:#3498db;
       }
       .ColorScheme-ViewText {
-        color:#31363b;
+        color:#222222;
       }
       .ColorScheme-ViewBackground {
-        color:#fcfcfc;
+        color:#c1c1c1;
       }
       .ColorScheme-ViewHover {
-        color:#93cee9;
+        color:#c1c1c1;
       }
       .ColorScheme-ViewFocus{
         color:#5f8787;
       }
       .ColorScheme-ButtonText {
-        color:#31363b;
+        color:#222222;
       }
       .ColorScheme-ButtonBackground {
-        color:#eff0f1;
+        color:#c1c1c1;
       }
       .ColorScheme-ButtonHover {
-        color:#93cee9;
+        color:#c1c1c1;
       }
       .ColorScheme-ButtonFocus{
         color:#5f8787;
@@ -534,7 +534,7 @@
          style="opacity:1;fill:currentColor;fill-opacity:1;stroke:none" />
     </g>
     <path
-       style="opacity:1;fill:#fdbc4b;fill-opacity:1;stroke:none"
+       style="opacity:1;fill:#9b8d7f;fill-opacity:1;stroke:none"
        d="m -4,78 v 5 h 2 v -5 z m 1,6 a 1,1 0 0 0 -1,1 1,1 0 0 0 1,1 1,1 0 0 0 1,-1 1,1 0 0 0 -1,-1 z"
        id="rect4343" />
   </g>
@@ -571,7 +571,7 @@
     <path
        id="path4350"
        d="m 18,78 v 5 h 2 v -5 z m 1,6 a 1,1 0 0 0 -1,1 1,1 0 0 0 1,1 1,1 0 0 0 1,-1 1,1 0 0 0 -1,-1 z"
-       style="opacity:1;fill:#fdbc4b;fill-opacity:1;stroke:none" />
+       style="opacity:1;fill:#9b8d7f;fill-opacity:1;stroke:none" />
   </g>
   <g
      transform="translate(0,20)"
@@ -604,7 +604,7 @@
        d="m 33,69 c -4.155,0 -7.90594,1.67156 -10.61719,4.38281 L 23.0918,74.0918 C 25.6223,71.5613 29.122,70 33,70 c 3.878,0 7.3777,1.5613 9.9082,4.0918 l 0.70899,-0.70899 C 40.90594,70.67156 37.155,69 33,69 Z"
        id="path4305" />
     <path
-       style="opacity:1;fill:#fdbc4b;fill-opacity:1;stroke:none"
+       style="opacity:1;fill:#9b8d7f;fill-opacity:1;stroke:none"
        d="m 40,78 v 5 h 2 v -5 z m 1,6 a 1,1 0 0 0 -1,1 1,1 0 0 0 1,1 1,1 0 0 0 1,-1 1,1 0 0 0 -1,-1 z"
        id="path4352" />
   </g>
@@ -641,7 +641,7 @@
     <path
        id="path4354"
        d="m 62,78 v 5 h 2 v -5 z m 1,6 a 1,1 0 0 0 -1,1 1,1 0 0 0 1,1 1,1 0 0 0 1,-1 1,1 0 0 0 -1,-1 z"
-       style="opacity:1;fill:#fdbc4b;fill-opacity:1;stroke:none" />
+       style="opacity:1;fill:#9b8d7f;fill-opacity:1;stroke:none" />
   </g>
   <g
      id="network-wireless-20-limited"
@@ -674,7 +674,7 @@
        d="m 55,69 c -4.155,0 -7.90594,1.67156 -10.61719,4.38281 L 45.0918,74.0918 C 47.6223,71.5613 51.122,70 55,70 c 3.878,0 7.3777,1.5613 9.9082,4.0918 l 0.70899,-0.70899 C 62.90594,70.67156 59.155,69 55,69 Z"
        id="path4567" />
     <path
-       style="opacity:1;fill:#fdbc4b;fill-opacity:1;stroke:none"
+       style="opacity:1;fill:#9b8d7f;fill-opacity:1;stroke:none"
        d="m 62,78 v 5 h 2 v -5 z m 1,6 a 1,1 0 0 0 -1,1 1,1 0 0 0 1,1 1,1 0 0 0 1,-1 1,1 0 0 0 -1,-1 z"
        id="path4569" />
   </g>
@@ -711,7 +711,7 @@
     <path
        id="path4583"
        d="m 62,78 v 5 h 2 v -5 z m 1,6 a 1,1 0 0 0 -1,1 1,1 0 0 0 1,1 1,1 0 0 0 1,-1 1,1 0 0 0 -1,-1 z"
-       style="opacity:1;fill:#fdbc4b;fill-opacity:1;stroke:none" />
+       style="opacity:1;fill:#9b8d7f;fill-opacity:1;stroke:none" />
   </g>
   <g
      transform="translate(-326,-427.36218)"
@@ -1069,7 +1069,7 @@
     <path
        id="path4891"
        d="m -3.2343755,35.013676 a 2,2 0 0 0 -1.767578,1.896484 2,2 0 0 0 0,0.08984 l 1,0 a 1,1 0 0 1 0.882812,-0.994141 l 0.115235,0 0,-0.992187 -0.230469,0 z m 0.232422,0.002 0,1 a 1,1 0 0 1 0.994141,0.882813 l 0,0.115234 0.0059,0 a 1,1 0 0 1 -0.882813,0.99414 l -0.115275,-4.7e-5 0,-0.0078 a 2,2 0 0 0 -0.199219,0.002 2,2 0 0 0 -0.800781,0.218703 l 0,-0.207031 -0.002,0 0,2 1,0 0,-1.013672 0.002,0 0.230469,0 a 2,2 0 0 0 1.767578,-1.896484 2,2 0 0 0 0,-0.08984 l -0.01367,0 0,-0.230469 a 2,2 0 0 0 -1.896484,-1.767578 2,2 0 0 0 -0.08984,0 z m -0.998047,5.984328 0,1 1,0 0,-1 -1,0 z"
-       style="fill:#fdbc4b;fill-opacity:1;stroke:none" />
+       style="fill:#9b8d7f;fill-opacity:1;stroke:none" />
   </g>
   <g
      transform="translate(-66,0)"
@@ -1161,7 +1161,7 @@
        x="44"
        y="0" />
     <path
-       style="fill:#fdbc4b;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       style="fill:#9b8d7f;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        d="m 57,19 3,-5 3,5 z"
        id="path4606" />
   </g>

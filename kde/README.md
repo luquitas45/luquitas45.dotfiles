@@ -34,11 +34,20 @@ sobre el icon theme para los widgets del shell. Por eso la bandeja (batería, re
 volumen, notificaciones) se dibuja con los SVG del repo y no con Papirus — y por
 eso recolorearlos ahí tiene efecto real.
 
-Estado de la paleta en esos 66 iconos: 33 ya usan el teal `#5f8787`; **29 todavía
-tienen azul de Breeze** (`#3daee6`/`#93cee9`) — `osd.svg` completo (36
-ocurrencias) y 2 en cada uno de otros 28. Pendiente: extender la recoloración a
-estos SVG con su propio `palette.map` + `recolor.sh` + `verify.sh`, igual que
-Kvantum y Aurorae.
+Cómo se colorean: los iconos resuelven el color **desde el scheme activo** vía
+clases `ColorScheme-*` (913 usos) y el bloque `<style id="current-color-scheme">`,
+que KSvg reemplaza al cargar — o sea que ese bloque es **inerte**. Lo que sí
+estaba horneado eran restos de Breeze: 23 colores **pintados** (`fill:`/`stroke:`,
+entre ellos los popups de OSD con `#3daee6` y `#7b7c7e`) y el resto sólo como
+placeholders. `kde/plasma-icons/{palette.map,recolor.sh,verify.sh}` migró ambos:
+los 66 SVG quedaron con **10 colores, todos de la paleta**
+(`#888888` 68 · `#c1c1c1` 46 · `#5f8787` 44 · `#000000` 28 · `#8a4f4f` 23 ·
+`#ddeecc` 16 · `#9b8d7f` 16 · `#222222` 12 · `#505050` 5 · `#aaaaaa` 3) y sin un
+solo hex de Breeze en el directorio.
+
+> Corrección: una versión anterior de este doc decía "29 de 66 todavía tienen azul
+de Breeze". Ese conteo miraba **literales**, no colores pintados: esos azules
+vivían dentro del bloque inerte de placeholders y no se renderizaban.
 
 ## Yakuake y Konsole
 

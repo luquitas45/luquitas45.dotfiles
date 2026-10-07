@@ -13,8 +13,8 @@
    inkscape:version="0.91 r13725"
    sodipodi:docname="kruler.svgz">
   <sodipodi:namedview
-     pagecolor="#ffffff"
-     bordercolor="#666666"
+     pagecolor="#c1c1c1"
+     bordercolor="#888888"
      borderopacity="1"
      objecttolerance="10"
      gridtolerance="10"
@@ -69,6 +69,6 @@
        id="path6"
        class="ColorScheme-Text"
        d="m 328,538.3622 0,2 0,12 1,0 17,0 0,-1 -17,0 0,-11 17,0 0,-2 -18,0 z m 2,3 0,3 1,0 0,-3 -1,0 z m 2,0 0,3 1,0 0,-3 -1,0 z m 2,0 0,6 1,0 0,-6 -1,0 z m 2,0 0,3 1,0 0,-3 -1,0 z m 2,0 0,3 1,0 0,-3 -1,0 z m 2,0 0,6 1,0 0,-6 -1,0 z m 2,0 0,3 1,0 0,-3 -1,0 z m 2,0 0,3 1,0 0,-3 -1,0 z"
-       style="color:#31363b;fill:currentColor;fill-opacity:1;stroke:none" />
+       style="color:#222222;fill:currentColor;fill-opacity:1;stroke:none" />
   </g>
 </svg>

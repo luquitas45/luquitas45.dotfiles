@@ -22,34 +22,34 @@
        type="text/css"
        id="current-color-scheme">
       .ColorScheme-Text {
-        color:#31363b;
+        color:#222222;
       }
       .ColorScheme-Background {
-        color:#eff0f1;
+        color:#c1c1c1;
       }
       .ColorScheme-Highlight {
         color:#5f8787;
       }
       .ColorScheme-ViewText {
-        color:#31363b;
+        color:#222222;
       }
       .ColorScheme-ViewBackground {
-        color:#fcfcfc;
+        color:#c1c1c1;
       }
       .ColorScheme-ViewHover {
-        color:#93cee9;
+        color:#c1c1c1;
       }
       .ColorScheme-ViewFocus{
         color:#5f8787;
       }
       .ColorScheme-ButtonText {
-        color:#31363b;
+        color:#222222;
       }
       .ColorScheme-ButtonBackground {
-        color:#eff0f1;
+        color:#c1c1c1;
       }
       .ColorScheme-ButtonHover {
-        color:#93cee9;
+        color:#c1c1c1;
       }
       .ColorScheme-ButtonFocus{
         color:#5f8787;
@@ -58,8 +58,8 @@
   </defs>
   <sodipodi:namedview
      id="base"
-     pagecolor="#ffffff"
-     bordercolor="#666666"
+     pagecolor="#c1c1c1"
+     bordercolor="#888888"
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"

@@ -1,7 +1,7 @@
 <svg id="window" viewBox="0 0 32 16" xmlns="http://www.w3.org/2000/svg">
     <style id="current-color-scheme" type="text/css">
         .ColorScheme-Text {
-            color:#232629;
+            color:#222222;
         }
         .ColorScheme-ButtonFocus{
             color:#5f8787;

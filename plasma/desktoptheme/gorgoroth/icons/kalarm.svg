@@ -28,34 +28,34 @@
        id="current-color-scheme"
        type="text/css">
       .ColorScheme-Text {
-        color:#31363b;
+        color:#222222;
       }
       .ColorScheme-Background {
-        color:#eff0f1;
+        color:#c1c1c1;
       }
       .ColorScheme-Highlight {
         color:#5f8787;
       }
       .ColorScheme-ViewText {
-        color:#31363b;
+        color:#222222;
       }
       .ColorScheme-ViewBackground {
-        color:#fcfcfc;
+        color:#c1c1c1;
       }
       .ColorScheme-ViewHover {
-        color:#93cee9;
+        color:#c1c1c1;
       }
       .ColorScheme-ViewFocus{
         color:#5f8787;
       }
       .ColorScheme-ButtonText {
-        color:#31363b;
+        color:#222222;
       }
       .ColorScheme-ButtonBackground {
-        color:#eff0f1;
+        color:#c1c1c1;
       }
       .ColorScheme-ButtonHover {
-        color:#93cee9;
+        color:#c1c1c1;
       }
       .ColorScheme-ButtonFocus{
         color:#5f8787;

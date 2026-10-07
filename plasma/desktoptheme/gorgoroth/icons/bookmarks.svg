@@ -27,16 +27,16 @@
        type="text/css"
        id="current-color-scheme">
       .ColorScheme-Text {
-        color:#31363b;
+        color:#222222;
       }
       .ColorScheme-Background{
-        color:#E9E8E8;
+        color:#c1c1c1;
       }
       .ColorScheme-ViewText {
-        color:#31363b;
+        color:#222222;
       }
       .ColorScheme-ViewBackground{
-        color:#ffffff;
+        color:#c1c1c1;
       }
       .ColorScheme-ViewHover {
         color:#000000;
@@ -45,10 +45,10 @@
         color:#5a5a5a;
       }
       .ColorScheme-ButtonText {
-        color:#31363b;
+        color:#222222;
       }
       .ColorScheme-ButtonBackground{
-        color:#E9E8E8;
+        color:#c1c1c1;
       }
       .ColorScheme-ButtonHover {
         color:#1489ff;

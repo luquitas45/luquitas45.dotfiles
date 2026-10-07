@@ -1,34 +1,34 @@
 <svg width="70" height="296" version="1.1" viewBox="0 0 70 296.00001" xmlns="http://www.w3.org/2000/svg">
     <defs>
         <style id="current-color-scheme" type="text/css">.ColorScheme-Text {
-        color:#31363b;
+        color:#222222;
       }
       .ColorScheme-Background {
-        color:#eff0f1;
+        color:#c1c1c1;
       }
       .ColorScheme-Highlight {
         color:#5f8787;
       }
       .ColorScheme-ViewText {
-        color:#31363b;
+        color:#222222;
       }
       .ColorScheme-ViewBackground {
-        color:#fcfcfc;
+        color:#c1c1c1;
       }
       .ColorScheme-ViewHover {
-        color:#93cee9;
+        color:#c1c1c1;
       }
       .ColorScheme-ViewFocus{
         color:#5f8787;
       }
       .ColorScheme-ButtonText {
-        color:#31363b;
+        color:#222222;
       }
       .ColorScheme-ButtonBackground {
-        color:#eff0f1;
+        color:#c1c1c1;
       }
       .ColorScheme-ButtonHover {
-        color:#93cee9;
+        color:#c1c1c1;
       }
       .ColorScheme-ButtonFocus{
         color:#5f8787;
@@ -74,13 +74,13 @@
     </g>
     <g id="22-22-input-keyboard-virtual-on" transform="translate(16,42.000007)">
         <path class="ColorScheme-Text" transform="translate(0,-1030.3622)" d="m2 1038.3622v11h18v-11zm1 1h16v1h-16zm0 2h16v7h-16zm1 1v1h2v-1zm3 0v1h2v-1zm3 0v1h2v-1zm3 0v1h2v-1zm3 0v1h2v-1zm-12 2v1h2v-1zm3 0v1h2v-1zm3 0v1h2v-1zm3 0v1h2v-1zm3 0v1h2v-1zm-12 2v1h2v-1zm3 0v1h8v-1zm9 0v1h2v-1z" fill="currentColor"/>
-        <path d="M 4.5,2 A 2.4999997,2.4999855 0 0 0 2,4.5 2.4999997,2.4999855 0 0 0 4.5,7 2.4999997,2.4999855 0 0 0 7,4.5 2.4999997,2.4999855 0 0 0 4.5,2 Z" fill="#11d116"/>
+        <path d="M 4.5,2 A 2.4999997,2.4999855 0 0 0 2,4.5 2.4999997,2.4999855 0 0 0 4.5,7 2.4999997,2.4999855 0 0 0 7,4.5 2.4999997,2.4999855 0 0 0 4.5,2 Z" fill="#ddeecc"/>
         <rect width="22" height="22" fill="none"/>
     </g>
     <g id="input-keyboard-virtual-on" transform="matrix(1.4545455,0,0,1.4545455,38,32.000002)">
         <rect width="22" height="22" fill="none"/>
         <path class="ColorScheme-Text" transform="matrix(.68749998 0 0 .68749998 -15.124999 22.000003)" d="m25-21v17h26v-17zm1 1h24v2h-24zm0 3h24v12h-24zm1 2v2h1v-2zm2 0v2h2v-2zm3 0v2h2v-2zm3 0v2h2v-2zm3 0v2h2v-2zm3 0v2h2v-2zm3 0v2h2v-2zm3 0v2h2v-2zm-20 3v2h3v-2zm4 0v2h2v-2zm3 0v2h2v-2zm3 0v2h2v-2zm3 0v2h2v-2zm3 0v2h2v-2zm3 0v2h3v-2zm-19 3v2h2v-2zm3 0v2h2v-2zm3 0v2h10v-2zm11 0v2h2v-2zm3 0v2h2v-2z" fill="currentColor"/>
-        <path d="m3.7812499 2.7500013a1.7187497 1.71874 0 0 0-1.71875 1.7187499 1.7187497 1.71874 0 0 0 1.71875 1.71875 1.7187497 1.71874 0 0 0 1.71875-1.71875 1.7187497 1.71874 0 0 0-1.71875-1.7187499z" fill="#11d116"/>
+        <path d="m3.7812499 2.7500013a1.7187497 1.71874 0 0 0-1.71875 1.7187499 1.7187497 1.71874 0 0 0 1.71875 1.71875 1.7187497 1.71874 0 0 0 1.71875-1.71875 1.7187497 1.71874 0 0 0-1.71875-1.7187499z" fill="#ddeecc"/>
     </g>
     <g id="22-22-input-keyboard-virtual-off" transform="translate(16,74.000007)">
         <path class="ColorScheme-Text" transform="translate(0,-1030.3622)" d="m2 1038.3622v11h18v-11zm1 1h16v1h-16zm0 2h16v7h-16zm1 1v1h2v-1zm3 0v1h2v-1zm3 0v1h2v-1zm3 0v1h2v-1zm3 0v1h2v-1zm-12 2v1h2v-1zm3 0v1h2v-1zm3 0v1h2v-1zm3 0v1h2v-1zm3 0v1h2v-1zm-12 2v1h2v-1zm3 0v1h8v-1zm9 0v1h2v-1z" fill="currentColor"/>

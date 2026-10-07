@@ -19,7 +19,7 @@
   <defs id="defs1">
     <style type="text/css" id="current-color-scheme">
       .ColorScheme-Text {
-        color:#31363b;
+        color:#222222;
       }
       </style>
   </defs>
@@ -27,8 +27,8 @@
      id="defs4168" />
   <sodipodi:namedview
      id="base"
-     pagecolor="#ffffff"
-     bordercolor="#666666"
+     pagecolor="#c1c1c1"
+     bordercolor="#888888"
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"

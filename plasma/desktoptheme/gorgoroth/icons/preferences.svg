@@ -1,13 +1,13 @@
 <svg id="svg" version="1.1" viewBox="0 0 22 22" xmlns="http://www.w3.org/2000/svg">
     <defs id="defs81">
         <style id="current-color-scheme" type="text/css">.ColorScheme-Text {
-            color:#232629;
+            color:#222222;
         }
         .ColorScheme-Background {
-            color:#eff0f1;
+            color:#c1c1c1;
         }
         .ColorScheme-ViewBackground {
-            color:#fcfcfc;
+            color:#c1c1c1;
         }
         .ColorScheme-ButtonFocus {
             color:#5f8787;
@@ -19,7 +19,7 @@
             color:#f67400;
         }
         .ColorScheme-NegativeText {
-            color:#da4453;
+            color:#8a4f4f;
         }</style>
     </defs>
     <g id="22-22-preferences-desktop-display-randr" transform="translate(-1,-1)">
@@ -31,7 +31,7 @@
     <g id="preferences-desktop-notification" transform="translate(-1,39)">
         <rect id="rect3068" x="1" y="1" width="22" height="22" fill-opacity="0"/>
         <rect id="rect4130-82-0" x="4.000011" y="4" width="15.999978" height="15.999987" ry="7.999989" fill="#5f8787"/>
-        <path id="rect4142-6" d="m11.202644 7.1999826-0.0026 7.2000124h1.599998l0.0026-7.2000124zm0.799999 7.9999894c-0.441822 0-0.799999 0.358171-0.799999 0.799999 0 0.441827 0.358177 0.799999 0.799999 0.799999s0.799999-0.358172 0.799999-0.799999c0-0.441828-0.358177-0.799999-0.799999-0.799999z" fill="#fcfcfc"/>
+        <path id="rect4142-6" d="m11.202644 7.1999826-0.0026 7.2000124h1.599998l0.0026-7.2000124zm0.799999 7.9999894c-0.441822 0-0.799999 0.358171-0.799999 0.799999 0 0.441827 0.358177 0.799999 0.799999 0.799999s0.799999-0.358172 0.799999-0.799999c0-0.441828-0.358177-0.799999-0.799999-0.799999z" fill="#c1c1c1"/>
     </g>
     <g id="22-22-preferences-system-bluetooth" transform="translate(-22,94)">
         <rect id="rect4645" x="66" width="22" height="22" fill="none"/>
