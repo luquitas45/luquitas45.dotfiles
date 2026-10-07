@@ -22,6 +22,7 @@ LINKS=(
   "plasma/look-and-feel/org.lucas.gorgoroth|$HOME/.local/share/plasma/look-and-feel/org.lucas.gorgoroth"
   "kde/aurorae/upstream-monochrome/Monochrome|$HOME/.local/share/aurorae/themes/Monochrome"
   "kde/aurorae/upstream-monochrome/MonochromeBlur|$HOME/.local/share/aurorae/themes/MonochromeBlur"
+  "kde/aurorae/Gorgoroth|$HOME/.local/share/aurorae/themes/Gorgoroth"
   "kde/kvantum/upstream-monochrome/Monochrome|$HOME/.config/Kvantum/Monochrome"
   "kde/kvantum/upstream-monochrome/MonochromeBlur|$HOME/.config/Kvantum/MonochromeBlur"
   "kde/kvantum/upstream-monochrome/MonochromeSolid|$HOME/.config/Kvantum/MonochromeSolid"

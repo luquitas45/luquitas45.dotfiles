@@ -24,7 +24,7 @@ name=gorgoroth
 
 [kwinrc][org.kde.kdecoration2]
 library=org.kde.kwin.aurorae.v2
-theme=__aurorae__svg__Monochrome
+theme=__aurorae__svg__Gorgoroth
 
 [kcminputrc][Mouse]
 cursorTheme=breeze_cursors
