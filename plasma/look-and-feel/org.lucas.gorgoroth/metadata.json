@@ -1,0 +1,19 @@
+{
+    "KPackageStructure": "Plasma/LookAndFeel",
+    "KPlugin": {
+        "Authors": [
+            {
+                "Email": "lucas@local",
+                "Name": "lucas"
+            }
+        ],
+        "Category": "Plasma Look And Feel",
+        "Description": "Gorgoroth — Black Metal session look for Plasma. Self-contained: no KDE Store dependencies.",
+        "EnabledByDefault": false,
+        "Id": "org.lucas.gorgoroth",
+        "License": "GPL-3.0-or-later",
+        "Name": "Gorgoroth",
+        "Version": "1.0.0",
+        "Website": "https://github.com/luquitas45/luquitas45.dotfiles"
+    }
+}
