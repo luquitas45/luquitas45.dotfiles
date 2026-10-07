@@ -17,6 +17,27 @@ Qué versiona el repo para la sesión Plasma y cómo se aplica.
 | FancyTasksNG (taskbar) | `kde/plasmoids/io.github.daydve.fancytasksng` | `~/.local/share/plasma/plasmoids/…` |
 | Panel / taskbar | `kde/fancytasks-panel.md` | — |
 
+## Iconos
+
+| Capa | Theme | Dónde | Versionado |
+|---|---|---|---|
+| Iconos de apps (menú, launcher, taskbar) | `Papirus-Dark` | paquete `papirus-icon-theme` | no: paquete, lo pinea el global theme |
+| Iconos del shell / bandeja (batería, red, volumen, notificaciones…) | propios del theme | `plasma/desktoptheme/gorgoroth/icons/` (66 SVG) | **sí, en el repo** |
+| Cursor | `breeze_cursors` | paquete `breeze-cursors` | no: paquete, lo pinea el global theme |
+| Botón de Kickoff | `org.cachyos.hello` | paquete de CachyOS, per-widget | no (parte del layout del panel) |
+| Launchers de FancyTasks | icono de cada app | su `.desktop` (resuelto por Papirus-Dark) | n/a |
+
+Detalle que importa: en Plasma, los iconos que trae el **desktop theme** ganan
+sobre el icon theme para los widgets del shell. Por eso la bandeja (batería, red,
+volumen, notificaciones) se dibuja con los SVG del repo y no con Papirus — y por
+eso recolorearlos ahí tiene efecto real.
+
+Estado de la paleta en esos 66 iconos: 33 ya usan el teal `#5f8787`; **29 todavía
+tienen azul de Breeze** (`#3daee6`/`#93cee9`) — `osd.svg` completo (36
+ocurrencias) y 2 en cada uno de otros 28. Pendiente: extender la recoloración a
+estos SVG con su propio `palette.map` + `recolor.sh` + `verify.sh`, igual que
+Kvantum y Aurorae.
+
 ## Aplicar
 
 ```bash

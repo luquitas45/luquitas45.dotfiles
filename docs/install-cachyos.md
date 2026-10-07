@@ -11,7 +11,7 @@ El repo versiona todo el look; lo que queda afuera son tres pasos manuales
 | `kvantum` | Widget style de Qt — el tema global pinea `widgetStyle=kvantum` |
 | `plasma-workspace` | `kwriteconfig6`, `qdbus6`, `plasma-apply-lookandfeel` (viene con Plasma) |
 | `papirus-icon-theme` | Iconos que pinea el tema global (`Papirus-Dark`) |
-| `breeze` | Cursor `breeze_cursors` |
+| `breeze-cursors` | Cursor `breeze_cursors` (lo pinea el tema global) |
 | `kitty`, `tmux`, `zsh`, `yazi`, `neovim`, `fzf` | Terminal y shell |
 | `ttf-meslo-nerd` | Fuente de kitty (`MesloLGS Nerd Font Mono`) y glifos del status de tmux / p10k |
 | `cachyos-zsh-config` | oh-my-zsh + powerlevel10k del sistema (`/usr/share/cachyos-zsh-config`) |
