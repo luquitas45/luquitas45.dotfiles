@@ -55,10 +55,21 @@ set_key indicatorLength 12               # longitud del indicador (tu ajuste a m
 set_key taskHoverEffect false
 set_key taskHoverEffectStyle 1
 set_key useBorders false
-set_key launchers "applications:systemsettings.desktop,preferred://filemanager"
 
-echo "Done. Restart plasmashell (or log out/in) to apply:"
-echo "  plasmashell --replace &"
+# User data, not theme: only seed launchers when the applet has none, so the
+# pinned apps survive re-running this script.
+if [ -z "$(kreadconfig6 --file plasma-org.kde.plasma.desktop-appletsrc \
+        --group Containments --group "$CONT" --group Applets --group "$APPLET" \
+        --group Configuration --group General --key launchers)" ]; then
+  set_key launchers "applications:systemsettings.desktop,preferred://filemanager"
+  echo "launchers: seeded with the defaults"
+else
+  echo "launchers: keeping the existing pinned list"
+fi
+
 set_key indicatorAccentColor false          # desactivar acento en el indicador
 set_key indicatorDominantColor false
 set_key indicatorCustomColor "#c1c1c1"      # indicador activo en claro (tmux)
+
+echo "Done. Restart plasmashell (or log out/in) to apply:"
+echo "  plasmashell --replace &"
