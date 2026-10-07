@@ -26,6 +26,9 @@ LINKS=(
   "kde/kvantum/upstream-monochrome/MonochromeBlur|$HOME/.config/Kvantum/MonochromeBlur"
   "kde/kvantum/upstream-monochrome/MonochromeSolid|$HOME/.config/Kvantum/MonochromeSolid"
   "kde/kvantum/kvantum.kvconfig|$HOME/.config/Kvantum/kvantum.kvconfig"
+  "kde/kvantum/Gorgoroth|$HOME/.config/Kvantum/Gorgoroth"
+  "kde/kvantum/GorgorothBlur|$HOME/.config/Kvantum/GorgorothBlur"
+  "kde/kvantum/GorgorothSolid|$HOME/.config/Kvantum/GorgorothSolid"
   "atajos|$HOME/Documentos/atajos"
   "curso-js/vault|$HOME/alejandria/js-curso-jonmircha"
 )
