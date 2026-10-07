@@ -3,6 +3,7 @@
 #
 # Exemptions (never read as a path at runtime):
 #   - documentation (*.md): may quote paths as examples
+#   - this script (it contains the search pattern itself)
 #   - comment lines (leading #, after file:line:)
 #   - Inkscape export metadata (inkscape:export-filename=...) inside SVG assets
 #
@@ -12,7 +13,7 @@ cd "$(dirname "${BASH_SOURCE[0]}")/.."
 
 offenders="$(
   git ls-files -z \
-    | grep -zv '\.md$' \
+    | grep -zvE '(\.md|^scripts/check-portable\.sh)$' \
     | xargs -0 grep -In '/home/' 2>/dev/null \
     | grep -v 'inkscape:export-filename' \
     | grep -vE '^[^:]+:[0-9]+:[[:space:]]*#' \
