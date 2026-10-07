@@ -16,6 +16,8 @@ Qué versiona el repo para la sesión Plasma y cómo se aplica.
 | Aurorae (decoración de ventanas) | `kde/aurorae/` | `~/.local/share/aurorae/themes/*` |
 | FancyTasksNG (taskbar) | `kde/plasmoids/io.github.daydve.fancytasksng` | `~/.local/share/plasma/plasmoids/…` |
 | Panel / taskbar | `kde/fancytasks-panel.md` | — |
+| Dev kitty (launcher + autostart) | `kde/net.local.kitty.dev.desktop` | `~/.local/share/applications/` + `~/.config/autostart/` |
+| Reglas KWin de ventanas | `kde/kwinrulesrc` | `~/.config/kwinrulesrc` |
 
 ## Iconos
 
@@ -69,6 +71,29 @@ Plasma 6 lo expone el propio KWin; es el único mecanismo que aplica en caliente
 y después se **verifican leyéndolos de vuelta**: el script sale con error si el
 readback no muestra `Meta+Z`/`Meta+X` como activos. Seguro de re-ejecutar: no
 duplica escritorios ni falla si ya está todo aplicado.
+
+## Kitty dev (tmux) en Desarrollo
+
+Un segundo kitty dedicado a desarrollo: abre (o adjunta) la sesión tmux `dev`
+con `tmux new-session -A -s dev`, arranca solo al login vía autostart y una
+regla de KWin lo fuerza al escritorio **Desarrollo**, sin borde. No toca
+`kitty.conf`: todo va por línea de comandos (`--class devkitty`) y por regla de
+ventana, así que el kitty normal sigue abriendo un shell pelado.
+
+```bash
+bash kde/apply-dev-kitty.sh   # crea/actualiza la regla y verifica el readback
+```
+
+El script lee el UUID del escritorio Desarrollo en runtime por D-Bus (nada
+hardcodeado) y escribe la regla en la ruta real del repo:
+`~/.config/kwinrulesrc` es un symlink y `kwriteconfig6` escribe con tmp+rename,
+así que apuntar al symlink lo reemplazaría con un archivo real — el script
+verifica después que el symlink siga intacto. Idempotente: localiza la regla
+por `wmclass=devkitty` (o por su `Description`) y la actualiza en el sitio;
+sólo la agrega si no existe, manteniendo `[General] count`/`rules` consistentes.
+
+Si la regla se acaba de crear, un re-login asegura que KWin la cargue y la
+aplique a las ventanas nuevas.
 
 ## Kvantum: recolor determinista
 

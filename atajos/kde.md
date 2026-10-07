@@ -28,6 +28,19 @@
 
 ---
 
+## 🐱 Kitty dev (tmux)
+
+| Qué hace | Cómo |
+|---|---|
+| Terminal de desarrollo con tmux (sesión `dev`, la adjunta si ya existe) | Arranca sola al login · escritorio **Desarrollo**, sin borde |
+| Lanzarla a mano | Menú de apps → **Kitty Dev (tmux)** |
+
+> Regla KWin (`wmclass=devkitty` → Desarrollo + sin borde): `bash kde/apply-dev-kitty.sh`
+> (idempotente, lee el UUID del escritorio en runtime y verifica el readback).
+> El kitty normal NO abre tmux: es un `.desktop` aparte, `kitty.conf` no se toca.
+
+---
+
 ## 🧰 Clásicos de Plasma (defaults)
 
 | Qué hace | Atajo |
