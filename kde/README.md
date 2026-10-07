@@ -16,7 +16,7 @@ Qué versiona el repo para la sesión Plasma y cómo se aplica.
 | Aurorae (decoración de ventanas) | `kde/aurorae/` | `~/.local/share/aurorae/themes/*` |
 | FancyTasksNG (taskbar) | `kde/plasmoids/io.github.daydve.fancytasksng` | `~/.local/share/plasma/plasmoids/…` |
 | Panel / taskbar | `kde/fancytasks-panel.md` | — |
-| Dev kitty (launcher + autostart) | `kde/net.local.kitty.dev.desktop` | `~/.local/share/applications/` + `~/.config/autostart/` |
+| Dev kitty (launcher + autostart) | `kde/dev-kitty.sh` + `kde/net.local.kitty.dev.desktop` | `~/.local/bin/dev-kitty` + `~/.local/share/applications/` + `~/.config/autostart/` |
 | Reglas KWin de ventanas | `kde/kwinrulesrc` | `~/.config/kwinrulesrc` |
 
 ## Iconos
@@ -79,6 +79,15 @@ con `tmux new-session -A -s dev`, arranca solo al login vía autostart y una
 regla de KWin lo fuerza al escritorio **Desarrollo**, sin borde. No toca
 `kitty.conf`: todo va por línea de comandos (`--class devkitty`) y por regla de
 ventana, así que el kitty normal sigue abriendo un shell pelado.
+
+La ventana queda **visible** en Desarrollo, pero ya no te arrastra allí al
+loguéate: son dos mecanismos en paralelo. La regla KWin le pone
+`fsplevel=4`/`fsplevelrule=2` (Focus stealing prevention en *Extreme*), que
+**niega** la petición de foco y evita que KWin siga a la ventana al otro
+escritorio; y el `.desktop` ejecuta el wrapper `kde/dev-kitty.sh`, que se
+acuerda del escritorio activo antes del lanzamiento, deja mapear la ventana y
+lo devuelve a donde estaba. `install.sh` linkea el wrapper en
+`~/.local/bin/dev-kitty`.
 
 ```bash
 bash kde/apply-dev-kitty.sh   # crea/actualiza la regla y verifica el readback
