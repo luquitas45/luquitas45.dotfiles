@@ -36,6 +36,7 @@ LINKS=(
   "kde/net.local.kitty.desktop|$HOME/.local/share/applications/net.local.kitty.desktop"
   "kde/net.local.kitty.dev.desktop|$HOME/.local/share/applications/net.local.kitty.dev.desktop"
   "kde/net.local.kitty.dev.desktop|$HOME/.config/autostart/net.local.kitty.dev.desktop"
+  "kde/dev-kitty.sh|$HOME/.local/bin/dev-kitty"
   "plasma/desktoptheme/gorgoroth|$HOME/.local/share/plasma/desktoptheme/gorgoroth"
   "plasma/colorschemes/Gorgoroth.colors|$HOME/.local/share/color-schemes/Gorgoroth.colors"
   "kde/plasmoids/io.github.daydve.fancytasksng|$HOME/.local/share/plasma/plasmoids/io.github.daydve.fancytasksng"

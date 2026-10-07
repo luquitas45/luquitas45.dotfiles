@@ -103,6 +103,8 @@ rule_set "$RULE_ID" noborder        true
 rule_set "$RULE_ID" noborderrule    2
 rule_set "$RULE_ID" desktops        "$DESKTOP_UUID"
 rule_set "$RULE_ID" desktopsrule    2
+rule_set "$RULE_ID" fsplevel        4
+rule_set "$RULE_ID" fsplevelrule    2
 # KWin 6 ignores the legacy singular keys; make sure they never linger
 kwriteconfig6 --file "$KWINRULES" --group "$RULE_ID" --key desktop     --delete
 kwriteconfig6 --file "$KWINRULES" --group "$RULE_ID" --key desktoprule --delete
@@ -143,6 +145,8 @@ check noborder        true
 check noborderrule    2
 check desktops        "$DESKTOP_UUID"
 check desktopsrule    2
+check fsplevel        4
+check fsplevelrule    2
 
 # the legacy singular keys must be gone
 for legacy_key in desktop desktoprule; do
