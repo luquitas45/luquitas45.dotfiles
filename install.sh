@@ -1,16 +1,34 @@
 #!/usr/bin/env bash
 # dotfiles — create symlinks from this repo into $HOME.
-# Idempotent and safe: never overwrites a real file (errors out with
-# instructions instead). Re-runnable.
+#
+# Two-pass and all-or-nothing: the whole plan is classified BEFORE anything is
+# created. If any destination is occupied by a real file or a foreign symlink,
+# the script prints every conflict with the exact command to resolve it and
+# exits without creating a single link — $HOME is never left half-linked.
+#
+# Idempotent: re-running only reports skips. It never overwrites a real file.
+#
+# Usage:
+#   bash install.sh          create the missing links
+#   bash install.sh --check  only print the plan (exit 1 if there are conflicts)
 set -euo pipefail
 
 DOTFILES_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+CHECK_ONLY=0
+for arg in "$@"; do
+  case "$arg" in
+    --check) CHECK_ONLY=1 ;;
+    -h|--help) sed -n '2,12p' "${BASH_SOURCE[0]}"; exit 0 ;;
+    *) echo "unknown argument: $arg (try --check)" >&2; exit 2 ;;
+  esac
+done
 
 # repo-relative source | absolute destination
 LINKS=(
   "home/.zshrc|$HOME/.zshrc"
   "home/.p10k.zsh|$HOME/.p10k.zsh"
   "config/tmux/tmux.conf|$HOME/.config/tmux/tmux.conf"
+  "config/tmux/bin/session-uptime|$HOME/.local/bin/session-uptime"
   "config/kitty/kitty.conf|$HOME/.config/kitty/kitty.conf"
   "config/kitty/black-metal-gorgoroth.conf|$HOME/.config/kitty/black-metal-gorgoroth.conf"
   "config/yazi/theme.toml|$HOME/.config/yazi/theme.toml"
@@ -38,42 +56,105 @@ LINKS=(
 NVIM_SRC="$DOTFILES_DIR/config/nvim"
 NVIM_DST="$HOME/.config/nvim"
 
-link_file() {
+PLAN_SRC=()
+PLAN_DST=()
+PLAN_STATE=()
+
+# classify src dst -> link | skip | conflict:<reason>
+classify() {
   local src="$1" dst="$2"
+  if [ ! -e "$src" ]; then
+    echo "conflict:missing-source:$src"
+    return
+  fi
   if [ -L "$dst" ]; then
     local current
     current="$(readlink "$dst")"
     if [ "$current" = "$src" ]; then
-      echo "skip (already linked): $dst"
-      return
+      echo "skip"
+    else
+      echo "conflict:symlink-to:$current"
     fi
-    echo "ERROR: $dst is a symlink to $current (not this repo)."
-    exit 1
+    return
   fi
   if [ -e "$dst" ]; then
-    echo "ERROR: $dst exists as a real file. Back it up first, e.g.:"
-    echo "  mv '$dst' '$dst.orig'"
-    exit 1
+    if [ -d "$dst" ]; then echo "conflict:real-directory"; else echo "conflict:real-file"; fi
+    return
   fi
-  mkdir -p "$(dirname "$dst")"
-  ln -s "$src" "$dst"
-  echo "linked: $dst"
+  echo "link"
+}
+
+add_to_plan() {
+  PLAN_SRC+=("$1")
+  PLAN_DST+=("$2")
+  PLAN_STATE+=("$(classify "$1" "$2")")
 }
 
 for pair in "${LINKS[@]}"; do
-  src="${pair%%|*}"
-  dst="${pair##*|}"
-  link_file "$DOTFILES_DIR/$src" "$dst"
+  add_to_plan "$DOTFILES_DIR/${pair%%|*}" "${pair##*|}"
+done
+add_to_plan "$NVIM_SRC" "$NVIM_DST"
+
+CREATE=0; SKIP=0; CONFLICTS=0
+for state in "${PLAN_STATE[@]}"; do
+  case "$state" in
+    link) CREATE=$((CREATE + 1)) ;;
+    skip) SKIP=$((SKIP + 1)) ;;
+    *)    CONFLICTS=$((CONFLICTS + 1)) ;;
+  esac
 done
 
-link_file "$NVIM_SRC" "$NVIM_DST"
+echo "dotfiles -> $HOME"
+echo "  ${#PLAN_DST[@]} destinations: $CREATE to create, $SKIP already linked, $CONFLICTS conflicts"
+
+if [ "$CONFLICTS" -gt 0 ]; then
+  echo ""
+  echo "ERROR: $CONFLICTS destination(s) are not links from this repo. Nothing was created."
+  echo ""
+  for i in "${!PLAN_DST[@]}"; do
+    case "${PLAN_STATE[$i]}" in
+      conflict:*)
+        echo "  ${PLAN_DST[$i]}"
+        echo "      ${PLAN_STATE[$i]#conflict:}"
+        echo "      fix: mv '${PLAN_DST[$i]}' '${PLAN_DST[$i]}.orig'"
+        ;;
+    esac
+  done
+  echo ""
+  echo "Move those aside and re-run. This script never overwrites a real file."
+  exit 1
+fi
+
+if [ "$CHECK_ONLY" = 1 ]; then
+  echo ""
+  echo "check only: nothing created."
+  exit 0
+fi
+
+for i in "${!PLAN_DST[@]}"; do
+  src="${PLAN_SRC[$i]}"
+  dst="${PLAN_DST[$i]}"
+  if [ "${PLAN_STATE[$i]}" = skip ]; then
+    echo "skip (already linked): $dst"
+  else
+    mkdir -p "$(dirname "$dst")"
+    ln -s "$src" "$dst"
+    echo "linked: $dst"
+  fi
+done
+
+# Prerequisites for the Plasma session look: warn, never install.
+MISSING=()
+for tool in kwriteconfig6 qdbus6 plasma-apply-lookandfeel kvantummanager; do
+  command -v "$tool" >/dev/null 2>&1 || MISSING+=("$tool")
+done
+if [ "${#MISSING[@]}" -gt 0 ]; then
+  echo ""
+  echo "WARN: missing tools for the Plasma session look: ${MISSING[*]}"
+  echo "      install with: sudo pacman -S kvantum plasma-workspace"
+fi
 
 echo ""
-echo "All links ready. Reload your shells/configs to pick them up."
-echo ""
-echo "Plasma session settings (panel translucency, kwin blur, accent,"
-echo "fancytasks applet, theme/scheme) are applied by:"
-echo "  bash kde/apply-gorgoroth.sh"
-echo "Run it after adding the panel/widgets, then log out/in."
-echo "Note: kde/net.local.kitty.desktop embeds the absolute home path of"
-echo "    'lucas' — adjust that file if this repo moves to another user."
+echo "All links ready. Open a new shell (and a new tmux/kitty session) to pick them up."
+echo "Next: bash kde/apply-gorgoroth.sh   (global theme + Kvantum + panel + blur, then relogin)"
+echo "Docs: docs/install-cachyos.md"
