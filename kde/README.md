@@ -50,6 +50,26 @@ bash kde/apply-gorgoroth.sh    # aplica el look y recarga la sesión
 que un paquete look-and-feel no puede setear: transparencia del panel, blur de
 KWin y la selección de tema de Kvantum (que vive en `kvantum.kvconfig`).
 
+## Escritorios virtuales
+
+Dos escritorios fijos, creados y nombrados de forma idempotente leyendo el
+estado vivo de KWin por D-Bus (los ids se leen en runtime, nada hardcodeado):
+
+| Escritorio | Nombre | Atajo |
+|---|---|---|
+| 1 | `Principal` | `Meta+Z` |
+| 2 | `Desarrollo` | `Meta+X` |
+
+```bash
+bash kde/apply-desktops.sh   # crea lo que falte, renombra, bindea y verifica
+```
+
+Los atajos se aplican con `setForeignShortcut` de `org.kde.kglobalaccel` (en
+Plasma 6 lo expone el propio KWin; es el único mecanismo que aplica en caliente)
+y después se **verifican leyéndolos de vuelta**: el script sale con error si el
+readback no muestra `Meta+Z`/`Meta+X` como activos. Seguro de re-ejecutar: no
+duplica escritorios ni falla si ya está todo aplicado.
+
 ## Kvantum: recolor determinista
 
 ```
