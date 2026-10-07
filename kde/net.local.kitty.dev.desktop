@@ -2,7 +2,7 @@
 Type=Application
 Name=Kitty Dev (tmux)
 Comment=Terminal de desarrollo con tmux
-Exec=/bin/sh -c "\$HOME/.local/bin/dev-kitty"
+Exec=/bin/sh -c "$HOME/.local/bin/dev-kitty"
 Icon=utilities-terminal
 Terminal=false
 StartupNotify=false

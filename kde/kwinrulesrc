@@ -6,18 +6,6 @@ wmclass=kitty
 wmclasscomplete=true
 wmclassmatch=1
 
-[2]
-Description=kitty dev tmux -> Desarrollo
-desktops=61f4ada2-546a-4499-8962-8fbda76b7584
-desktopsrule=2
-fsplevel=4
-fsplevelrule=2
-noborder=true
-noborderrule=2
-wmclass=devkitty
-wmclasscomplete=true
-wmclassmatch=1
-
 [General]
-count=2
-rules=1,2
+count=1
+rules=1

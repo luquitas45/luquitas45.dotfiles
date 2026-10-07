@@ -1,50 +1,33 @@
 #!/usr/bin/env bash
 # Dev kitty launcher (autostart + menu).
 #
-# Opens kitty with class devkitty running/attaching the tmux session "dev".
-# A KWin rule forces that window onto the "Desarrollo" desktop. KWin follows a
-# new window on another desktop, so this wrapper returns the current desktop to
-# the one in effect before the launch.
+# Opens kitty with class devkitty running/attaching the tmux session "dev" and
+# makes sure it ends up on the "Desarrollo" desktop WITHOUT dragging the current
+# desktop there.
+#
+# Why not a KWin window rule: a "force desktop" rule makes KWin follow the new
+# window to Desarrollo (it steals the desktop on login). Moving the window after
+# it exists does not switch the desktop, so we load a tiny KWin script that
+# moves every devkitty window (see devkitty-to-desarrollo.js next to this file).
 #
 # Usage: dev-kitty.sh
 set -uo pipefail
 
 KITTY=/usr/bin/kitty
-DEV_DESKTOP_NAME="Desarrollo"
-POLL_TRIES=20
-POLL_SLEEP=0.25
+SCRIPT_NAME="devkitty-to-desarrollo"
+HERE="$(cd "$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")" && pwd)"
+HELPER="$HERE/devkitty-to-desarrollo.js"
 
-current_desktop() {
-  qdbus6 org.kde.KWin /VirtualDesktopManager \
-    org.kde.KWin.VirtualDesktopManager.current 2>/dev/null
-}
-
-desktop_uuid_by_name() {
-  qdbus6 --literal org.kde.KWin /VirtualDesktopManager \
-    org.kde.KWin.VirtualDesktopManager.desktops 2>/dev/null \
-    | grep -oP '\(uss\) \d+, "[^"]+", "[^"]+"' \
-    | sed 's/(uss) \([0-9]\+\), "\([^"]*\)", "\([^"]*\)"/\1\t\2\t\3/' \
-    | awk -F'\t' -v want="$1" '$3 == want { print $2; exit }'
-}
-
-prev="$(current_desktop)"
-dev="$(desktop_uuid_by_name "$DEV_DESKTOP_NAME")"
-
+# Launch the dev kitty on the current desktop. It must NOT be born on Desarrollo
+# or KWin would follow it there.
 setsid "$KITTY" --class devkitty --title Dev tmux new-session -A -s dev >/dev/null 2>&1 &
 
-# Let KWin map the window and apply the rule; if it followed it to Desarrollo,
-# put the desktop back where it was.
-if [ -n "$prev" ] && [ -n "$dev" ] && [ "$prev" != "$dev" ]; then
-  for _ in $(seq "$POLL_TRIES"); do
-    now="$(current_desktop)"
-    if [ "$now" = "$dev" ]; then
-      busctl --user set-property org.kde.KWin /VirtualDesktopManager \
-        org.kde.KWin.VirtualDesktopManager current s "$prev" >/dev/null 2>&1
-      break
-    fi
-    [ "$now" != "$prev" ] && break   # something else moved it: do not fight
-    sleep "$POLL_SLEEP"
-  done
+# Load the KWin helper once per session; it also fixes the window that just
+# appeared (it scans the existing windows when it loads).
+loaded="$(qdbus6 org.kde.KWin /Scripting org.kde.kwin.Scripting.isScriptLoaded "$SCRIPT_NAME" 2>/dev/null)"
+if [ "$loaded" != "true" ]; then
+  qdbus6 org.kde.KWin /Scripting org.kde.kwin.Scripting.loadScript "$HELPER" "$SCRIPT_NAME" >/dev/null 2>&1 || true
+  qdbus6 org.kde.KWin /Scripting org.kde.kwin.Scripting.start >/dev/null 2>&1 || true
 fi
 
 exit 0
