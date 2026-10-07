@@ -19,6 +19,12 @@ LINKS=(
   "plasma/desktoptheme/gorgoroth|$HOME/.local/share/plasma/desktoptheme/gorgoroth"
   "plasma/colorschemes/Gorgoroth.colors|$HOME/.local/share/color-schemes/Gorgoroth.colors"
   "kde/plasmoids/io.github.daydve.fancytasksng|$HOME/.local/share/plasma/plasmoids/io.github.daydve.fancytasksng"
+  "kde/aurorae/upstream-monochrome/Monochrome|$HOME/.local/share/aurorae/themes/Monochrome"
+  "kde/aurorae/upstream-monochrome/MonochromeBlur|$HOME/.local/share/aurorae/themes/MonochromeBlur"
+  "kde/kvantum/upstream-monochrome/Monochrome|$HOME/.config/Kvantum/Monochrome"
+  "kde/kvantum/upstream-monochrome/MonochromeBlur|$HOME/.config/Kvantum/MonochromeBlur"
+  "kde/kvantum/upstream-monochrome/MonochromeSolid|$HOME/.config/Kvantum/MonochromeSolid"
+  "kde/kvantum/kvantum.kvconfig|$HOME/.config/Kvantum/kvantum.kvconfig"
   "atajos|$HOME/Documentos/atajos"
   "curso-js/vault|$HOME/alejandria/js-curso-jonmircha"
 )
