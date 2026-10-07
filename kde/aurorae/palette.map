@@ -1,0 +1,25 @@
+# Aurorae recolor map: Monochrome (Patrik Wyde) -> Gorgoroth (Black Metal).
+#
+# Format: <old-hex> <new-hex>   # role
+# Consumed by:
+#   recolor.sh -> applies the hex map to the decoration SVGs and the same
+#                 colours as RGB triplets (r,g,b) to the theme rc file
+#   verify.sh  -> fails if any non-identity old hex or RGB triplet survives
+#
+# Rules:
+#   - identity pairs (old == new) are never substituted and never flagged
+#   - *TextShadowColor=255,255,255,255 is functional in the upstream theme
+#     (same category as Kvantum's #ff00ff marker): the RGB pass would turn it
+#     into the text colour, so recolor.sh restores it afterwards and verify.sh
+#     does not flag 255,255,255
+#
+# Gorgoroth ladder: 000000 bg · c1c1c1 foreground · 8a4f4f negative.
+
+1e1e20 000000   # window background -> pure black
+ffffff c1c1c1   # brightest glyphs -> foreground
+bebebe c1c1c1   # bright gray -> foreground
+aaaaac c1c1c1   # text
+78787a 888888   # inactive text / tabs
+464648 505050   # active focused tab color
+da4453 8a4f4f   # negative red
+000000 000000   # identity: pure black

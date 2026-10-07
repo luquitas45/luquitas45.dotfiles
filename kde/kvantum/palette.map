@@ -1,0 +1,55 @@
+# Kvantum recolor map: Monochrome (Patrik Wyde) -> Gorgoroth (Black Metal).
+#
+# Format: <old-hex> <new-hex>   # role
+# Consumed by:
+#   recolor.sh  -> applies the substitution to the theme SVG and kvconfig
+#   verify.sh   -> fails if any non-identity old hex survives in a derived theme
+#
+# Rules:
+#   - identity pairs (old == new) are never substituted and never flagged
+#   - #ff00ff is a functional marker (Kvantum "menu-shadow-hint" elements) and
+#     is never remapped
+#   - two kvconfig keys are overridden by role in recolor.sh after this pass:
+#       alt.base.color       = #2a2325  (alternate background)
+#       highlight.text.color = #000000  (dark text on the teal highlight)
+#
+# Gorgoroth ladder: 000000 bg · 222222 button/selection · 2a2325 alternate
+# 505050 dim · 888888/999999/aaaaaa mids · c1c1c1 foreground · 5f8787 teal
+# accent · 9b8d7f visited · 8a4f4f negative · ddeecc bright.
+
+141416 000000   # dark edges / shadows
+1e1e20 000000   # window / base background
+222222 222222   # identity: button and selection dark
+22252e 222222   # breeze dark placeholder
+232325 222222   # dark placeholder
+28282a 222222   # dark placeholder
+31363b 222222   # breeze dark placeholder
+323234 2a2325   # mid-light border -> alternate warm dark
+38383a 222222   # mid dark
+414143 505050   # low mid gray -> dim
+464648 505050   # light.color
+48484a 505050
+4b4b4d 505050
+525254 505050
+565658 505050
+5a5a5c 505050   # inactive highlight / text
+5c616c 505050   # breeze gray placeholder
+606062 505050
+646464 aaaaaa   # link (KDE scheme ForegroundLink)
+646466 505050
+6e6e70 888888
+727274 5f8787   # highlight -> teal accent
+78787a 888888
+7a7a7c 888888
+7f8c8d 9b8d7f   # visited link (KDE scheme ForegroundVisited)
+88888a 888888
+8c8c8e 999999
+aaaaac c1c1c1   # text
+c8c8ca c1c1c1
+d2d2d4 c1c1c1
+dadadc c1c1c1
+ffffff c1c1c1   # brightest glyphs -> foreground
+3daee9 5f8787   # breeze accent placeholder -> teal
+da4453 8a4f4f   # negative red
+000000 000000   # identity: pure black
+ff00ff ff00ff   # identity: functional marker, do not remap

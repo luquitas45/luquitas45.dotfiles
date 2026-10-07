@@ -1,0 +1,22 @@
+{
+    "KPackageStructure": "KWin/Aurorae",
+    "KPlugin": {
+        "Authors": [
+            {
+                "Email": "patrik@wyde.se",
+                "Name": "Patrik Wyde"
+            }
+        ],
+        "Category": "Plasma Window Decorations",
+        "Description": "Gorgoroth: recolored from \"Monochrome\" by Patrik Wyde to the Black Metal Gorgoroth palette.",
+        "EnabledByDefault": true,
+        "Id": "Gorgoroth",
+        "License": "GPLv3",
+        "Name": "Gorgoroth",
+        "ServiceTypes": [
+            "KWin/Aurorae"
+        ],
+        "Version": "1.0.0",
+        "Website": "https://github.com/luquitas45/luquitas45.dotfiles"
+    }
+}
