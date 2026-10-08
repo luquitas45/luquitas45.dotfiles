@@ -39,9 +39,9 @@
 
 `config/tmux/bin/sess-open <sesión>`: si la sesión no existe la construye con la
 plantilla; si existe solo se adjunta. Yakuake adjunta `SAPE` y el kitty dev adjunta
-`dev` (ambos resuelven `sess-open`). `sess-open` se resuelve por PATH: `~/.local/bin`
-queda en el PATH de sesión vía `config/environment.d/local-paths.conf` (Yakuake/Konsole
-no expande `$HOME` ni `~`, así que necesita encontrarlo por nombre).
+`dev`. El perfil de Yakuake (`Kitty.profile`) corre
+`/bin/sh -c "$HOME/.local/bin/sess-open SAPE"`: Konsole pasa ese `Command` a `sh`,
+que expande `$HOME`, así que no depende del PATH del proceso.
 
 | Sesión | Para | Plantilla |
 |---|---|---|
