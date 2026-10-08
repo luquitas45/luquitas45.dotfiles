@@ -1,0 +1,13 @@
+[Appearance]
+Skin=gorgoroth
+
+[Desktop Entry]
+DefaultProfile=Kitty.profile
+
+[Dialogs]
+FirstRun=false
+
+[Window]
+Height=63
+KeepOpen=false
+ShowTabBar=false

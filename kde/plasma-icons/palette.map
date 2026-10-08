@@ -1,0 +1,49 @@
+# Plasma shell icon recolor map: Breeze/Monochrome leftovers -> Gorgoroth.
+#
+# Scope: plasma/desktoptheme/gorgoroth/icons/*.svg (66 files).
+#
+# These icons already resolve their semantic colors from the active KDE color
+# scheme through `.ColorScheme-*` classes (913 usages) and the
+# `<style id="current-color-scheme">` placeholder block, which KSvg replaces at
+# load time. What remained literal were Breeze leftovers: 23 colors were actually
+# painted (`fill:`/`stroke:`), and the rest only appeared as placeholders.
+#
+# This map covers both, so the directory ends up with no Breeze hex at all (and
+# a plain `grep` no longer suggests — wrongly — that the theme is off-palette).
+# The placeholder half is inert at runtime; the painted half is what changes the
+# rendered OSD popups and a few app icons.
+#
+# Format: <old-hex> <new-hex>   # role
+#
+# Gorgoroth ladder: 000000 bg · 222222 surface · 505050 dim · 888888 mids
+# c1c1c1 foreground · 5f8787 teal accent · 9b8d7f warm neutral
+# ddeecc positive · 8a4f4f negative · aaaaaa neutral.
+
+3daee6 5f8787   # Breeze blue -> teal (osd.svg paints this)
+1e92ff 5f8787   # bright Breeze blue -> teal
+0000ff 5f8787   # pure blue (quassel, slc)
+2980b9 5f8787   # wiki blue (yakuake)
+93cee9 c1c1c1   # light Breeze blue (ViewHover placeholder) -> foreground
+da4453 8a4f4f   # Breeze red -> negative
+f47750 8a4f4f   # flat-ui orange -> negative
+fdbc4b 9b8d7f   # Breeze yellow -> warm neutral
+11d116 ddeecc   # Breeze green -> positive
+2ecc71 ddeecc   # flat-ui green -> positive
+43be80 ddeecc   # flat-ui green -> positive
+2abb9b ddeecc   # teal-green -> positive
+9b59b6 aaaaaa   # flat-ui purple -> neutral
+ffffff c1c1c1   # white glyphs -> foreground
+fcfcfc c1c1c1   # near white -> foreground
+e9e8e8 c1c1c1   # near white -> foreground
+cccccc c1c1c1   # light gray -> foreground
+bdc3c7 c1c1c1   # light gray -> foreground
+eff0f1 c1c1c1   # Breeze ViewBackground placeholder -> foreground
+7b7c7e 888888   # Breeze mid gray -> mid (osd.svg paints this)
+666666 888888   # mid gray
+566060 505050   # dark gray-teal -> dim
+31363b 222222   # Breeze dark gray -> surface
+232629 222222   # dark gray -> surface
+333333 222222   # dark gray -> surface
+00000f 000000   # near-black -> background
+000000 000000   # identity: background
+5f8787 5f8787   # identity: teal already in place

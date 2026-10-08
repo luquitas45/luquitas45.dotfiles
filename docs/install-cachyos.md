@@ -15,6 +15,7 @@ El repo versiona todo el look; lo que queda afuera son tres pasos manuales
 | `kitty`, `tmux`, `zsh`, `yazi`, `neovim`, `fzf` | Terminal y shell |
 | `ttf-meslo-nerd` | Fuente de kitty (`MesloLGS Nerd Font Mono`) y glifos del status de tmux / p10k |
 | `cachyos-zsh-config` | oh-my-zsh + powerlevel10k del sistema (`/usr/share/cachyos-zsh-config`) |
+| `yakuake` | Terminal desplegable; su skin y el perfil de Konsole que usa están versionados |
 | `zoxide` | `z` (salto rápido a directorios) |
 | `glow` | Hojas de atajos del atajo global `Meta+H` |
 
@@ -80,6 +81,10 @@ $EDITOR kde/kvantum/palette.map && bash kde/kvantum/recolor.sh && bash kde/kvant
 
 # Aurorae -> decoración Gorgoroth (hex en los SVG + tripletas RGB en el .rc)
 $EDITOR kde/aurorae/palette.map && bash kde/aurorae/recolor.sh && bash kde/aurorae/verify.sh
+
+# Iconos del shell (Plasma desktop theme): restos de Breeze -> paleta
+# (migración en el lugar; incluye el bloque inerte de placeholders)
+bash kde/plasma-icons/recolor.sh && bash kde/plasma-icons/verify.sh
 ```
 
 `verify.sh` falla si queda un color de la paleta vieja. Detalles de cada mapeo

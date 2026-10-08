@@ -4,41 +4,41 @@
   <defs id="defs3871">
     <style type="text/css" id="current-color-scheme">
       .ColorScheme-Text {
-        color:#31363b;
+        color:#222222;
       }
       .ColorScheme-Background {
-        color:#eff0f1;
+        color:#c1c1c1;
       }
       .ColorScheme-Highlight {
         color:#5f8787;
       }
       .ColorScheme-ViewText {
-        color:#31363b;
+        color:#222222;
       }
       .ColorScheme-ViewBackground {
-        color:#fcfcfc;
+        color:#c1c1c1;
       }
       .ColorScheme-ViewHover {
-        color:#93cee9;
+        color:#c1c1c1;
       }
       .ColorScheme-ViewFocus{
         color:#5f8787;
       }
       .ColorScheme-ButtonText {
-        color:#31363b;
+        color:#222222;
       }
       .ColorScheme-ButtonBackground {
-        color:#eff0f1;
+        color:#c1c1c1;
       }
       .ColorScheme-ButtonHover {
-        color:#93cee9;
+        color:#c1c1c1;
       }
       .ColorScheme-ButtonFocus{
         color:#5f8787;
       }
       </style>
   </defs>
-  <sodipodi:namedview id="base" pagecolor="#ffffff" bordercolor="#666666" borderopacity="1.0" inkscape:pageopacity="0.0" inkscape:pageshadow="2" inkscape:zoom="22.627417" inkscape:cx="10.011592" inkscape:cy="14.266598" inkscape:document-units="px" inkscape:current-layer="layer1" showgrid="true" fit-margin-top="0" fit-margin-left="0" fit-margin-right="0" fit-margin-bottom="0" inkscape:window-width="2560" inkscape:window-height="957" inkscape:window-x="-4" inkscape:window-y="29" inkscape:window-maximized="1" inkscape:showpageshadow="false" viewbox-height="32" borderlayer="true">
+  <sodipodi:namedview id="base" pagecolor="#c1c1c1" bordercolor="#888888" borderopacity="1.0" inkscape:pageopacity="0.0" inkscape:pageshadow="2" inkscape:zoom="22.627417" inkscape:cx="10.011592" inkscape:cy="14.266598" inkscape:document-units="px" inkscape:current-layer="layer1" showgrid="true" fit-margin-top="0" fit-margin-left="0" fit-margin-right="0" fit-margin-bottom="0" inkscape:window-width="2560" inkscape:window-height="957" inkscape:window-x="-4" inkscape:window-y="29" inkscape:window-maximized="1" inkscape:showpageshadow="false" viewbox-height="32" borderlayer="true">
     <inkscape:grid type="xygrid" id="grid4132" originx="0" originy="-1.4782812e-05"/>
     <sodipodi:guide position="0,21.999997" orientation="22,0" id="guide4203"/>
     <sodipodi:guide position="0,-2.6171875e-06" orientation="0,22" id="guide4205"/>

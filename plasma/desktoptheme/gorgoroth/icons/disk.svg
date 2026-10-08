@@ -1,13 +1,13 @@
 <svg id="svg32" version="1.1" viewBox="0 0 22 22" xmlns="http://www.w3.org/2000/svg">
      <style type="text/css" id="current-color-scheme">
         .ColorScheme-Text {
-            color:#232629;
+            color:#222222;
         }
         .ColorScheme-NeutralText {
             color:#f67400;
         }
         .ColorScheme-NegativeText {
-            color:#da4453;
+            color:#8a4f4f;
         }
     </style>
     <g id="disk-quota" class="ColorScheme-Text">

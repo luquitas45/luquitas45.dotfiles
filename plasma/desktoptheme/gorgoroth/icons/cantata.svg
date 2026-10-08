@@ -13,8 +13,8 @@
    inkscape:version="0.91 r13725"
    sodipodi:docname="cantata.svgz">
   <sodipodi:namedview
-     pagecolor="#ffffff"
-     bordercolor="#666666"
+     pagecolor="#c1c1c1"
+     bordercolor="#888888"
      borderopacity="1"
      objecttolerance="10"
      gridtolerance="10"
@@ -50,7 +50,7 @@
        id="current-color-scheme"
        type="text/css">
       .ColorScheme-Text {
-        color:#31363b;
+        color:#222222;
       }
       </style>
   </defs>

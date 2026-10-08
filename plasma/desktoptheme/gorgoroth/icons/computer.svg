@@ -27,16 +27,16 @@
        id="current-color-scheme"
        type="text/css">
       .ColorScheme-Text {
-        color:#31363b;
+        color:#222222;
       }
       .ColorScheme-Background{
-        color:#E9E8E8;
+        color:#c1c1c1;
       }
       .ColorScheme-ViewText {
         color:#000000;
       }
       .ColorScheme-ViewBackground{
-        color:#ffffff;
+        color:#c1c1c1;
       }
       .ColorScheme-ViewHover {
         color:#000000;
@@ -48,7 +48,7 @@
         color:#000000;
       }
       .ColorScheme-ButtonBackground{
-        color:#E9E8E8;
+        color:#c1c1c1;
       }
       .ColorScheme-ButtonHover {
         color:#1489ff;
@@ -62,7 +62,7 @@
      id="22-22-computer"
      transform="matrix(0.75000099,0,0,0.75000099,-273.42897,-345.59906)">
     <rect
-       style="opacity:0.01000001;fill:#00000f;fill-opacity:0.00392157;stroke:none"
+       style="opacity:0.01000001;fill:#000000;fill-opacity:0.00392157;stroke:none"
        id="rect3074"
        width="29.333307"
        height="29.333271"
@@ -79,7 +79,7 @@
      transform="matrix(0.75,0,0,0.75,-168,-765.27168)"
      id="22-22-computer-laptop">
     <rect
-       style="opacity:0.01000001;fill:#31363b;fill-opacity:0.00392157;stroke:none"
+       style="opacity:0.01000001;fill:#222222;fill-opacity:0.00392157;stroke:none"
        id="rect7292"
        width="29.333338"
        height="29.333296"
@@ -101,7 +101,7 @@
        height="29.333271"
        width="29.333307"
        id="rect3018"
-       style="opacity:0.01000001;fill:#00000f;fill-opacity:0.00392157;stroke:none" />
+       style="opacity:0.01000001;fill:#000000;fill-opacity:0.00392157;stroke:none" />
     <path
        style="fill:currentColor;fill-opacity:1;stroke:none"
        d="M 40,36.011719 40,56 l 11,0 0,3 -3,0 0,1 12,0 0,-1 -3,0 0,-3 11,0 0,-19.988281 z m 1,1 26,0 2e-6,16.988249 -26,0 z M 52,56 l 4,0 0,3 -4,0 z"
@@ -118,7 +118,7 @@
        height="29.333296"
        width="29.333338"
        id="rect3026"
-       style="opacity:0.01000001;fill:#31363b;fill-opacity:0.00392157;stroke:none" />
+       style="opacity:0.01000001;fill:#222222;fill-opacity:0.00392157;stroke:none" />
     <path
        style="fill:currentColor;fill-opacity:1;stroke:none"
        class="ColorScheme-Text"
@@ -130,7 +130,7 @@
      id="16-16-computer"
      transform="matrix(0.54506989,0,0,0.54506989,-210.34508,-233.67977)">
     <rect
-       style="opacity:0.01000001;fill:#00000f;fill-opacity:0.00392157;stroke:none"
+       style="opacity:0.01000001;fill:#000000;fill-opacity:0.00392157;stroke:none"
        id="rect3034"
        width="29.333307"
        height="29.333271"
@@ -146,7 +146,7 @@
      transform="matrix(0.5454565,0,0,0.5454565,-133.81866,-547.83604)"
      id="16-16-computer-laptop">
     <rect
-       style="opacity:0.01000001;fill:#31363b;fill-opacity:0.00392157;stroke:none"
+       style="opacity:0.01000001;fill:#222222;fill-opacity:0.00392157;stroke:none"
        id="rect3042"
        width="29.333338"
        height="29.333296"

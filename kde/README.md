@@ -16,6 +16,8 @@ Qué versiona el repo para la sesión Plasma y cómo se aplica.
 | Aurorae (decoración de ventanas) | `kde/aurorae/` | `~/.local/share/aurorae/themes/*` |
 | FancyTasksNG (taskbar) | `kde/plasmoids/io.github.daydve.fancytasksng` | `~/.local/share/plasma/plasmoids/…` |
 | Panel / taskbar | `kde/fancytasks-panel.md` | — |
+| Yakuake (terminal desplegable) | `kde/yakuake/` | `~/.config/yakuakerc`, `~/.local/share/yakuake/skins/*` |
+| Konsole (perfil + schemes) | `kde/konsole/` | `~/.local/share/konsole/{Kitty.profile,*.colorscheme}` |
 | Dev kitty (launcher + atajo) | `kde/dev-kitty.sh` + `kde/dev-desktop.sh` + `kde/net.local.kitty.dev.desktop` + `kde/net.local.dev-desktop.desktop` | `~/.local/bin/` + `~/.local/share/applications/` |
 | Reglas KWin de ventanas | `kde/kwinrulesrc` | `~/.config/kwinrulesrc` |
 
@@ -34,23 +36,20 @@ sobre el icon theme para los widgets del shell. Por eso la bandeja (batería, re
 volumen, notificaciones) se dibuja con los SVG del repo y no con Papirus — y por
 eso recolorearlos ahí tiene efecto real.
 
-Estado de la paleta en esos 66 iconos: 33 ya usan el teal `#5f8787`; **29 todavía
-tienen azul de Breeze** (`#3daee6`/`#93cee9`) — `osd.svg` completo (36
-ocurrencias) y 2 en cada uno de otros 28. Pendiente: extender la recoloración a
-estos SVG con su propio `palette.map` + `recolor.sh` + `verify.sh`, igual que
-Kvantum y Aurorae.
+Cómo se colorean: los iconos resuelven el color **desde el scheme activo** vía
+clases `ColorScheme-*` (913 usos) y el bloque `<style id="current-color-scheme">`,
+que KSvg reemplaza al cargar — o sea que ese bloque es **inerte**. Lo que sí
+estaba horneado eran restos de Breeze: 23 colores **pintados** (`fill:`/`stroke:`,
+entre ellos los popups de OSD con `#3daee6` y `#7b7c7e`) y el resto sólo como
+placeholders. `kde/plasma-icons/{palette.map,recolor.sh,verify.sh}` migró ambos:
+los 66 SVG quedaron con **10 colores, todos de la paleta**
+(`#888888` 68 · `#c1c1c1` 46 · `#5f8787` 44 · `#000000` 28 · `#8a4f4f` 23 ·
+`#ddeecc` 16 · `#9b8d7f` 16 · `#222222` 12 · `#505050` 5 · `#aaaaaa` 3) y sin un
+solo hex de Breeze en el directorio.
 
-## Aplicar
-
-```bash
-bash install.sh                # crea todos los symlinks (idempotente)
-bash kde/apply-gorgoroth.sh    # aplica el look y recarga la sesión
-```
-
-`apply-gorgoroth.sh` delega el look en el global theme
-(`plasma-apply-lookandfeel -a org.lucas.gorgoroth`) y sólo escribe a mano lo
-que un paquete look-and-feel no puede setear: transparencia del panel, blur de
-KWin y la selección de tema de Kvantum (que vive en `kvantum.kvconfig`).
+> Corrección: una versión anterior de este doc decía "29 de 66 todavía tienen azul
+de Breeze". Ese conteo miraba **literales**, no colores pintados: esos azules
+vivían dentro del bloque inerte de placeholders y no se renderizaban.
 
 ## Escritorios virtuales
 
@@ -117,6 +116,63 @@ clave inválida puede descartar el archivo entero, así que no dependemos de ell
 para esto.
 
 `~/.config/kwinrulesrc` conserva sólo la regla `[1]` (kitty común, sin borde).
+
+## Yakuake y Konsole
+
+El terminal desplegable y su paleta, versionados y derivados de la misma fuente
+que kitty (`config/kitty/black-metal-gorgoroth.conf`).
+
+| Pieza | Origen (vendored) | Derivado | Verify |
+|---|---|---|---|
+| Skin de Yakuake | `kde/yakuake/skins/upstream-monochrome/` | `kde/yakuake/skins/Gorgoroth/` | `kde/yakuake/verify.sh` |
+| Scheme de Konsole | `kde/konsole/colorschemes/KittyMonochrome.colorscheme` | `kde/konsole/colorschemes/Gorgoroth.colorscheme` | `kde/konsole/colorschemes/verify.sh` |
+
+Detalles de cada formato:
+
+- La skin de Yakuake es del **formato viejo** (sin metadata): `title.skin` y
+  `tabs.skin` con geometría, rutas a SVG y el color de texto **por componente**
+  (`red=170 green=170 blue=172`). El recolor toca los hex de los SVG, esos tres
+  componentes, y aplica un override a `tabs/tab_selected.svg` para que la
+  pestaña activa lleve el teal `#5f8787`.
+- El scheme de Konsole se **genera por sección**, no por sustitución de valores:
+  el Monochrome usa el mismo triplet (`30,30,32`) en `[Background]` y `[Color0]`,
+  que deben terminar en valores distintos. Cada slot sale de kitty
+  (`[ColorN]` = slot normal, `[ColorNIntense]` = bright) y `verify.sh` compara
+  los 16 slots + background/foreground contra el conf de kitty, así los dos
+  terminales no pueden divergir.
+
+Aplicar (los dos archivos son symlinks del repo, así que el cambio aplica solo):
+
+```bash
+# Skin de Yakuake
+kwriteconfig6 --file yakuakerc --group Appearance --key Skin gorgoroth
+# Scheme del perfil que usa Yakuake
+kwriteconfig6 --file ~/.local/share/konsole/Kitty.profile --group Appearance --key ColorScheme Gorgoroth
+# Yakuake 26.08 no expone reload por DBus: reiniciar (las sesiones tmux sobreviven)
+kill $(pgrep -x yakuake | head -1); setsid yakuake >/dev/null 2>&1 &
+```
+
+El reinicio es seguro porque el perfil corre `tmux new-session -A -s main`: el
+server de tmux es un proceso aparte y Yakuake se reengancha al volver.
+
+Rollback: `Skin=monochrome` + `ColorScheme=KittyMonochrome` y reiniciar (los dos
+siguen vendorizados).
+
+> Nota: en esta máquina el doble escritorio usa una sesión tmux `dev` (kitty
+> `--class devkitty`); el profile de Konsole de Yakuake usa la sesión `main`.
+> Conviven sin pisarse (servidores tx en sesiones distintas).
+
+## Aplicar
+
+```bash
+bash install.sh                # crea todos los symlinks (idempotente)
+bash kde/apply-gorgoroth.sh    # aplica el look y recarga la sesión
+```
+
+`apply-gorgoroth.sh` delega el look en el global theme
+(`plasma-apply-lookandfeel -a org.lucas.gorgoroth`) y sólo escribe a mano lo
+que un paquete look-and-feel no puede setear: transparencia del panel, blur de
+KWin y la selección de tema de Kvantum (que vive en `kvantum.kvconfig`).
 
 ## Kvantum: recolor determinista
 
