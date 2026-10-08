@@ -31,6 +31,7 @@ LINKS=(
   "config/tmux/tmux.conf|$HOME/.config/tmux/tmux.conf"
   "config/tmux/bin/session-uptime|$HOME/.local/bin/session-uptime"
   "config/tmux/bin/sess-open|$HOME/.local/bin/sess-open"
+  "config/environment.d/local-paths.conf|$HOME/.config/environment.d/local-paths.conf"
   "config/kitty/kitty.conf|$HOME/.config/kitty/kitty.conf"
   "config/kitty/black-metal-gorgoroth.conf|$HOME/.config/kitty/black-metal-gorgoroth.conf"
   "config/yazi/theme.toml|$HOME/.config/yazi/theme.toml"
