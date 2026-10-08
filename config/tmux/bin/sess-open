@@ -1,0 +1,59 @@
+#!/usr/bin/env bash
+# sess-open <session>: attach to a preset tmux session, building its fixed
+# layout the first time it is created (idempotent: attach if it exists).
+#
+# Presets:
+#   SAPE (Yakuake drop-down)
+#       1. "terminal" : bare shell in $HOME
+#       2. "IA"       : pi in ~/workspace
+#   dev  (dev kitty in the Desarrollo desktop)
+#       1. "ws"        : paned window in ~/workspace
+#            left  : nvim (LazyVim)        (~66% width)
+#            right : shell (top) / pi (bottom)
+#       2. "IA"       : pi in ~/workspace
+#
+# Used as the Command of the Yakuake profile and by kde/dev-kitty.sh, so the
+# fixed sessions materialize exactly when their terminal is opened.
+#
+# Usage: sess-open <SAPE|dev>
+set -uo pipefail
+
+WS="${WS:-$HOME/workspace}"
+PI="${PI:-$HOME/.local/bin/pi}"
+
+name="${1:-}"
+if [ -z "$name" ]; then
+  echo "usage: sess-open <SAPE|dev>" >&2
+  exit 2
+fi
+
+if ! tmux has-session -t "$name" 2>/dev/null; then
+  case "$name" in
+    SAPE)
+      tmux new-session -d -s SAPE -c "$HOME" >/dev/null
+      tmux rename-window -t SAPE:1 terminal >/dev/null
+      tmux new-window -t SAPE -n IA -c "$WS" >/dev/null
+      tmux send-keys -t SAPE:2.1 "$PI" Enter >/dev/null
+      tmux select-window -t SAPE:1 >/dev/null
+      ;;
+    dev)
+      tmux new-session -d -s dev -c "$WS" >/dev/null
+      tmux rename-window -t dev:1 ws >/dev/null
+      # left = nvim, right column = shell (top) / pi (bottom)
+      tmux split-window -h -p 34 -t dev:1 -c "$WS" >/dev/null
+      tmux split-window -v -p 50 -t dev:1.2 -c "$WS" >/dev/null
+      tmux send-keys -t dev:1.1 nvim Enter >/dev/null
+      tmux send-keys -t dev:1.3 "$PI" Enter >/dev/null
+      tmux select-pane -t dev:1.1 >/dev/null
+      tmux new-window -t dev -n IA -c "$WS" >/dev/null
+      tmux send-keys -t dev:2.1 "$PI" Enter >/dev/null
+      tmux select-window -t dev:1 >/dev/null
+      ;;
+    *)
+      echo "sess-open: unknown session '$name' (SAPE, dev)" >&2
+      exit 2
+      ;;
+  esac
+fi
+
+exec tmux new-session -A -s "$name"

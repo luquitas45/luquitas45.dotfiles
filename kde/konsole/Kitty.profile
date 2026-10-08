@@ -2,6 +2,7 @@
 ColorScheme=Gorgoroth
 
 [General]
-Command=/usr/bin/tmux new-session -A -s main
+# Adjunta (o construye) la sesión fija SAPE. sess-open está en ~/.local/bin (PATH).
+Command=sess-open SAPE
 Name=Kitty
 Parent=FALLBACK/

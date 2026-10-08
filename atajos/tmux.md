@@ -28,9 +28,23 @@
 | **Guardar** el estado de todas las sesiones | `C-a C-s` |
 | **Restaurar** lo guardado | `C-a C-r` |
 
-> **Auto-piloto activado**: continuum guarda solo cada 15 min y restaura
-> automáticamente al arrancar tmux. No tenés que hacer nada.
-> nvim vuelve con su sesión (archivos/layout) gracias a resurrect + strategy nvim.
+> El **auto-restore está apagado** (`@continuum-restore off`): las sesiones fijas
+> nacen de plantillas on-demand (sesiones fijas abajo), no de un snapshot. El
+> guardado manual `C-a C-s` y el restore `C-a C-r` siguen activos; nvim vuelve con
+> su sesión gracias a resurrect + strategy nvim.
+
+---
+
+## 📦 Sesiones fijas (presets on-demand)
+
+`config/tmux/bin/sess-open <sesión>`: si la sesión no existe la construye con la
+plantilla; si existe solo se adjunta. Yakuake adjunta `SAPE` y el kitty dev adjunta
+`dev` (ambos resuelven `sess-open` por PATH, ~/.local/bin).
+
+| Sesión | Para | Plantilla |
+|---|---|---|
+| `SAPE` | Yakuake | `terminal` (shell) · `IA` (pi en ~/workspace) |
+| `dev` | kitty dev (Desarrollo) | `ws` paneles (nvim · shell · pi, ~/workspace) · `IA` (pi) |
 
 ---
 

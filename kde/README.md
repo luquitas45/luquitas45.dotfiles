@@ -86,7 +86,8 @@ KWin, para que la tecla nunca quede muerta en el medio.
 ## Kitty dev (tmux) en Desarrollo
 
 Un kitty dedicado a desarrollo: abre (o adjunta) la sesión tmux `dev` con
-`tmux new-session -A -s dev`. No toca `kitty.conf`: todo va por línea de
+`sess-open dev` (que arma la plantilla fija, ver `atajos/tmux.md`). No toca
+`kitty.conf`: todo va por línea de
 comandos (`--class devkitty`), así que el kitty normal sigue abriendo un shell
 pelado. **Ya no arranca al login** (se eliminó el autostart
 `~/.config/autostart/net.local.kitty.dev.desktop`), por eso el login queda en
@@ -152,8 +153,8 @@ kwriteconfig6 --file ~/.local/share/konsole/Kitty.profile --group Appearance --k
 kill $(pgrep -x yakuake | head -1); setsid yakuake >/dev/null 2>&1 &
 ```
 
-El reinicio es seguro porque el perfil corre `tmux new-session -A -s main`: el
-server de tmux es un proceso aparte y Yakuake se reengancha al volver.
+El reinicio es seguro porque el perfil corre `sess-open SAPE`: el server de tmux
+es un proceso aparte y Yakuake se reengancha al volver.
 
 Rollback: `Skin=monochrome` + `ColorScheme=KittyMonochrome` y reiniciar (los dos
 siguen vendorizados).
@@ -162,9 +163,9 @@ Atajo (toggle): la propia app registra `toggle-window-state` (default `F12`). En
 estas máquinas se usa **`Meta+D`** — por lo tanto `Meta+D` deja de ser "Show
 Desktop". Se aplica (idempotente, con readback) con `bash kde/apply-shortcuts.sh`.
 
-> Nota: en esta máquina el doble escritorio usa una sesión tmux `dev` (kitty
-> `--class devkitty`); el profile de Konsole de Yakuake usa la sesión `main`.
-> Conviven sin pisarse (servidores tx en sesiones distintas).
+> Nota: en esta máquina el doble escritorio usa la sesión fija `dev` (kitty
+> `--class devkitty`) y Yakuake usa la sesión fija `SAPE`; ambas las arma
+> `config/tmux/bin/sess-open` (ver `atajos/tmux.md`). Conviven sin pisarse.
 
 ## Aplicar
 

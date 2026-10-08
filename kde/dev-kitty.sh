@@ -34,8 +34,9 @@ if pgrep -f -- '--class[= ]devkitty' >/dev/null 2>&1; then
   exit 0
 fi
 
-# Launch the dev kitty on the current desktop.
-setsid "$KITTY" --class devkitty --title Dev tmux new-session -A -s dev >/dev/null 2>&1 &
+# Launch the dev kitty on the current desktop. It runs sess-open, which builds
+# (on first use) or attaches the fixed "dev" session layout.
+setsid "$KITTY" --class devkitty --title Dev "$HOME/.local/bin/sess-open" dev >/dev/null 2>&1 &
 
 # Load the KWin helper once per session; it also fixes the window that just
 # appeared (it scans the existing windows when it loads).
