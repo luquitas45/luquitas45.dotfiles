@@ -48,6 +48,19 @@
 
 ---
 
+## 🔻 Yakuake (terminal desplegable)
+
+| Qué hace | Atajo |
+|---|---|
+| Abrir/retraer Yakuake (sesión tmux `main`) | `Meta+D` |
+
+> Skin Gorgoroth + perfil Konsole `Kitty.profile` vienen del repo; arranca sola al
+> login (autostart). `Meta+D` dejó de ser "Show Desktop". El atajo lo registra la
+> propia app (acción `toggle-window-state`) y vive en `~/.config/kglobalshortcutsrc`
+> (no versionado todavía, igual que `kwinrc`).
+
+---
+
 ## 🧰 Clásicos de Plasma (defaults)
 
 | Qué hace | Atajo |

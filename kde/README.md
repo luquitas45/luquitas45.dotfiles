@@ -158,6 +158,11 @@ server de tmux es un proceso aparte y Yakuake se reengancha al volver.
 Rollback: `Skin=monochrome` + `ColorScheme=KittyMonochrome` y reiniciar (los dos
 siguen vendorizados).
 
+Atajo (toggle): la propia app registra `toggle-window-state` (default `F12`). En
+estas máquinas se usa **`Meta+D`** — por lo tanto `Meta+D` deja de ser "Show
+Desktop". El atajo vive en `~/.config/kglobalshortcutsrc` (componente `yakuake`;
+pendiente versionar ese archivo como `kwinrc`).
+
 > Nota: en esta máquina el doble escritorio usa una sesión tmux `dev` (kitty
 > `--class devkitty`); el profile de Konsole de Yakuake usa la sesión `main`.
 > Conviven sin pisarse (servidores tx en sesiones distintas).
