@@ -13,7 +13,8 @@
 | Confirmación visual | Se abre una ventana kitty con el listado de hojas · Enter para cerrar |
 
 > El wrapper vive en `~/.local/share/applications/net.local.kitty.desktop`
-> (kitty → glow en el directorio de hojas).
+> (kitty → glow en el directorio de hojas). El atajo `Meta+H` lo aplica
+> `bash kde/apply-shortcuts.sh` (idempotente, verificado).
 
 ---
 
@@ -56,8 +57,8 @@
 
 > Skin Gorgoroth + perfil Konsole `Kitty.profile` vienen del repo; arranca sola al
 > login (autostart). `Meta+D` dejó de ser "Show Desktop". El atajo lo registra la
-> propia app (acción `toggle-window-state`) y vive en `~/.config/kglobalshortcutsrc`
-> (no versionado todavía, igual que `kwinrc`).
+> propia app (acción `toggle-window-state`); lo aplica `bash kde/apply-shortcuts.sh`
+> (idempotente, verificado), igual que `Meta+H` del glow.
 
 ---
 

@@ -160,8 +160,7 @@ siguen vendorizados).
 
 Atajo (toggle): la propia app registra `toggle-window-state` (default `F12`). En
 estas máquinas se usa **`Meta+D`** — por lo tanto `Meta+D` deja de ser "Show
-Desktop". El atajo vive en `~/.config/kglobalshortcutsrc` (componente `yakuake`;
-pendiente versionar ese archivo como `kwinrc`).
+Desktop". Se aplica (idempotente, con readback) con `bash kde/apply-shortcuts.sh`.
 
 > Nota: en esta máquina el doble escritorio usa una sesión tmux `dev` (kitty
 > `--class devkitty`); el profile de Konsole de Yakuake usa la sesión `main`.
@@ -172,6 +171,7 @@ pendiente versionar ese archivo como `kwinrc`).
 ```bash
 bash install.sh                # crea todos los symlinks (idempotente)
 bash kde/apply-gorgoroth.sh    # aplica el look y recarga la sesión
+bash kde/apply-shortcuts.sh    # atajos globales del repo (glow Meta+H, yakuake Meta+D)
 ```
 
 `apply-gorgoroth.sh` delega el look en el global theme
