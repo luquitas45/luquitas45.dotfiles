@@ -16,7 +16,7 @@ Qué versiona el repo para la sesión Plasma y cómo se aplica.
 | Aurorae (decoración de ventanas) | `kde/aurorae/` | `~/.local/share/aurorae/themes/*` |
 | FancyTasksNG (taskbar) | `kde/plasmoids/io.github.daydve.fancytasksng` | `~/.local/share/plasma/plasmoids/…` |
 | Panel / taskbar | `kde/fancytasks-panel.md` | — |
-| Dev kitty (launcher + autostart) | `kde/dev-kitty.sh` + `kde/net.local.kitty.dev.desktop` | `~/.local/bin/dev-kitty` + `~/.local/share/applications/` + `~/.config/autostart/` |
+| Dev kitty (launcher + atajo) | `kde/dev-kitty.sh` + `kde/dev-desktop.sh` + `kde/net.local.kitty.dev.desktop` + `kde/net.local.dev-desktop.desktop` | `~/.local/bin/` + `~/.local/share/applications/` |
 | Reglas KWin de ventanas | `kde/kwinrulesrc` | `~/.config/kwinrulesrc` |
 
 ## Iconos
@@ -59,41 +59,62 @@ estado vivo de KWin por D-Bus (los ids se leen en runtime, nada hardcodeado):
 
 | Escritorio | Nombre | Atajo |
 |---|---|---|
-| 1 | `Principal` | `Meta+Z` |
-| 2 | `Desarrollo` | `Meta+X` |
+| 1 | `Principal` | `Meta+Z` (acción `Switch to Desktop 1` de KWin) |
+| 2 | `Desarrollo` | `Meta+X` — entra a Desarrollo y lanza/reusa el kitty dev |
 
 ```bash
 bash kde/apply-desktops.sh   # crea lo que falte, renombra, bindea y verifica
 ```
 
-Los atajos se aplican con `setForeignShortcut` de `org.kde.kglobalaccel` (en
-Plasma 6 lo expone el propio KWin; es el único mecanismo que aplica en caliente)
-y después se **verifican leyéndolos de vuelta**: el script sale con error si el
-readback no muestra `Meta+Z`/`Meta+X` como activos. Seguro de re-ejecutar: no
-duplica escritorios ni falla si ya está todo aplicado.
+`Meta+Z` sigue bindeado a la acción de KWin `Switch to Desktop 1`. `Meta+X` ya no
+es `Switch to Desktop 2`: ahora dispara un *command shortcut* propio. Ambos se
+aplican en caliente con `setForeignShortcut` de `org.kde.kglobalaccel` (en Plasma
+6 lo expone el propio KWin) y después se **verifican leyéndolos de vuelta**: el
+script sale con error si el readback no muestra `Meta+Z` con la tecla
+`268435546`, si el componente dev no tiene `268435544`, o si KWin todavía
+conserva `268435544` en `Switch to Desktop 2`. Seguro de re-ejecutar: no duplica
+escritorios ni falla si ya está todo aplicado.
+
+### Cómo se registra un command shortcut
+
+Además del `.desktop` en `~/.local/share/applications/` con
+`X-KDE-GlobalAccel-CommandShortcut=true`, KGlobalAccel necesita dos llamadas por
+D-Bus: `doRegister` (componente + acción `_launch` + nombre) y
+`setForeignShortcut` (bindea la tecla en caliente, sin re-login). `Meta+X` se
+bindea al componente `net.local.dev-desktop.desktop` **antes** de liberarlo de
+KWin, para que la tecla nunca quede muerta en el medio.
 
 ## Kitty dev (tmux) en Desarrollo
 
-Un segundo kitty dedicado a desarrollo: abre (o adjunta) la sesión tmux `dev`
-con `tmux new-session -A -s dev` y arranca solo al login. No toca `kitty.conf`:
-todo va por línea de comandos (`--class devkitty`), así que el kitty normal
-sigue abriendo un shell pelado.
+Un kitty dedicado a desarrollo: abre (o adjunta) la sesión tmux `dev` con
+`tmux new-session -A -s dev`. No toca `kitty.conf`: todo va por línea de
+comandos (`--class devkitty`), así que el kitty normal sigue abriendo un shell
+pelado. **Ya no arranca al login** (se eliminó el autostart
+`~/.config/autostart/net.local.kitty.dev.desktop`), por eso el login queda en
+**Principal**. Se abre con `Meta+X` o desde el menú de apps.
 
-La ventana queda **visible en Desarrollo sin arrastrarte allí**. El disparador es
-`kde/dev-kitty.sh` (linkeado a `~/.local/bin/dev-kitty` y usado como `Exec` del
-`.desktop`):
+`Meta+X` dispara el command shortcut `net.local.dev-desktop.desktop` →
+`kde/dev-desktop.sh` (linkeado a `~/.local/bin/dev-desktop`), que:
 
-1. lanza `kitty --class devkitty --title Dev tmux new-session -A -s dev` en el
-escritorio actual, y
-2. carga `kde/devkitty-to-desarrollo.js` como KWin script (una vez por sesión),
-que mueve **toda** ventana `devkitty` al escritorio Desarrollo y la deja sin borde.
+1. resuelve el escritorio `Desarrollo` desde el listado vivo de D-Bus (sin uuid
+hardcodeado; falla con un mensaje claro si no existe), y
+2. cambia a ese escritorio **primero**, y
+3. `exec`ea `kde/dev-kitty.sh` (resuelto relativo a `BASH_SOURCE`).
 
-**Por qué un KWin script y no una regla de ventana**: una regla que *fuerza* el
-escritorio hace que KWin **siga** la ventana nueva a Desarrollo (te roba el
-escritorio al loguearte). Mover la ventana **después** de creada no cambia el
-escritorio actual — verificado en vivo. Además las reglas de KWin sólo cargan al
-iniciar KWin y una clave inválida puede descartar el archivo entero, así que no
-dependemos de ellas para esto.
+Cambiar primero garantiza que una ventana nueva nazca en Desarrollo. Si ya hay
+un kitty `devkitty` corriendo, el wrapper lo **reusa** en vez de abrir un
+duplicado (`pgrep -f -- '--class[= ]devkitty'`) y sale 0.
+
+`kde/dev-kitty.sh` sigue cargando `kde/devkitty-to-desarrollo.js` como KWin
+script (idempotente: se asegura aunque reuse), que deja **toda** ventana
+`devkitty` sin borde y en Desarrollo. Ahora ese helper **sólo** garantiza
+noborder/colocación; entrar a Desarrollo lo hace `dev-desktop.sh` antes de
+lanzar. **Por qué un KWin script y no una regla de ventana**: una regla que
+*fuerza* el escritorio hace que KWin **siga** la ventana nueva a Desarrollo (te
+roba el escritorio); mover la ventana **después** de creada no cambia el
+escritorio actual. Además las reglas de KWin sólo cargan al iniciar KWin y una
+clave inválida puede descartar el archivo entero, así que no dependemos de ellas
+para esto.
 
 `~/.config/kwinrulesrc` conserva sólo la regla `[1]` (kitty común, sin borde).
 

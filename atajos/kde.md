@@ -22,9 +22,13 @@
 | Qué hace | Atajo |
 |---|---|
 | Ir al escritorio 1 · **Principal** | `Meta+Z` |
-| Ir al escritorio 2 · **Desarrollo** | `Meta+X` |
+| Entrar a **Desarrollo** y lanzar/reusar el kitty dev | `Meta+X` |
 
-> Se crean y bindean con `bash kde/apply-desktops.sh` (idempotente, verifica el readback).
+> El escritorio 1 sigue bindeado a la acción `Switch to Desktop 1` de KWin;
+> `Meta+X` es un *command shortcut* propio (componente
+> `net.local.dev-desktop.desktop`, acción `_launch`) registrado con `doRegister`
+> + `setForeignShortcut` de `org.kde.kglobalaccel`, que aplica en caliente. Se
+> aplica con `bash kde/apply-desktops.sh` (idempotente, verifica el readback).
 
 ---
 
@@ -32,14 +36,15 @@
 
 | Qué hace | Cómo |
 |---|---|
-| Terminal de desarrollo con tmux (sesión `dev`, la adjunta si ya existe) | Arranca sola al login · escritorio **Desarrollo**, sin borde |
-| Lanzarla a mano | Menú de apps → **Kitty Dev (tmux)** |
+| Terminal de desarrollo con tmux (sesión `dev`, la adjunta si ya existe) | `Meta+X` o menú de apps → **Kitty Dev (tmux)** |
+| Ya no arranca al login | El login queda en **Principal** (se eliminó el autostart) |
 
-> Sin reglas de ventana: el `.desktop` ejecuta el wrapper `kde/dev-kitty.sh`
-> (`~/.local/bin/dev-kitty`), que lanza kitty y carga el KWin script
-> `kde/devkitty-to-desarrollo.js`: mueve la ventana `devkitty` a Desarrollo y la
-> deja sin borde **sin cambiar el escritorio activo** (una regla sí lo cambiaría).
-> El kitty normal NO abre tmux: es un `.desktop` aparte, `kitty.conf` no se toca.
+> `Meta+X` llama a `kde/dev-desktop.sh` (`~/.local/bin/dev-desktop`): resuelve el
+> escritorio `Desarrollo` desde D-Bus (sin uuid hardcodeado), cambia a ese
+> escritorio **primero** y `exec`ea `kde/dev-kitty.sh`. Si ya hay un kitty
+> `devkitty` corriendo lo **reusa** (sin duplicados). El KWin script
+> `kde/devkitty-to-desarrollo.js` ahora sólo garantiza noborder/colocación. El
+> kitty normal sigue sin tmux porque `kitty.conf` no se toca.
 
 ---
 
