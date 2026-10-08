@@ -6,7 +6,8 @@
 # the script prints every conflict with the exact command to resolve it and
 # exits without creating a single link — $HOME is never left half-linked.
 #
-# Idempotent: re-running only reports skips. It never overwrites a real file.
+# Idempotent: re-running only reports skips and removes a stale autostart link.
+# It never overwrites a real file.
 #
 # Usage:
 #   bash install.sh          create the missing links
@@ -35,8 +36,9 @@ LINKS=(
   "pi/agent/themes/gorgoroth.json|$HOME/.pi/agent/themes/gorgoroth.json"
   "kde/net.local.kitty.desktop|$HOME/.local/share/applications/net.local.kitty.desktop"
   "kde/net.local.kitty.dev.desktop|$HOME/.local/share/applications/net.local.kitty.dev.desktop"
-  "kde/net.local.kitty.dev.desktop|$HOME/.config/autostart/net.local.kitty.dev.desktop"
+  "kde/net.local.dev-desktop.desktop|$HOME/.local/share/applications/net.local.dev-desktop.desktop"
   "kde/dev-kitty.sh|$HOME/.local/bin/dev-kitty"
+  "kde/dev-desktop.sh|$HOME/.local/bin/dev-desktop"
   "plasma/desktoptheme/gorgoroth|$HOME/.local/share/plasma/desktoptheme/gorgoroth"
   "plasma/colorschemes/Gorgoroth.colors|$HOME/.local/share/color-schemes/Gorgoroth.colors"
   "kde/plasmoids/io.github.daydve.fancytasksng|$HOME/.local/share/plasma/plasmoids/io.github.daydve.fancytasksng"
@@ -146,6 +148,21 @@ for i in "${!PLAN_DST[@]}"; do
     echo "linked: $dst"
   fi
 done
+
+# Remove the stale autostart symlink that earlier installs created; the dev
+# kitty is no longer autostarted, so login stays on the Principal desktop. Only
+# touch a symlink whose target resolves inside this repo, so a real file or a
+# foreign link is never deleted. Idempotent: gone is a no-op.
+STALE_AUTOSTART="$HOME/.config/autostart/net.local.kitty.dev.desktop"
+if [ -L "$STALE_AUTOSTART" ]; then
+  stale_target="$(readlink -f "$STALE_AUTOSTART" 2>/dev/null || true)"
+  case "$stale_target" in
+    "$DOTFILES_DIR"/*)
+      rm -f "$STALE_AUTOSTART"
+      echo "removed stale autostart link: $STALE_AUTOSTART"
+      ;;
+  esac
+fi
 
 # Prerequisites for the Plasma session look: warn, never install.
 MISSING=()

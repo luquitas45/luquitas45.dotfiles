@@ -1,12 +1,19 @@
 #!/usr/bin/env bash
-# Ensure the two virtual desktops and their Meta shortcuts (idempotent).
+# Ensure the two virtual desktops and the Meta+Z / Meta+X shortcuts (idempotent).
 #
-# Desktops: 1 = "Principal", 2 = "Desarrollo". Shortcuts: Meta+Z -> desktop 1,
-# Meta+X -> desktop 2. State is read live from KWin over D-Bus (ids are never
-# hardcoded); only missing desktops are created and only drifted names are
-# renamed. Shortcuts go through kglobalaccel's setForeignShortcut — the only
-# mechanism that hot-applies on Plasma 6 — and are then verified by reading
-# them back; the script exits non-zero if the readback does not match.
+# Desktops: 1 = "Principal", 2 = "Desarrollo". State is read live from KWin over
+# D-Bus (ids are never hardcoded); only missing desktops are created and only
+# drifted names are renamed.
+#
+# Shortcuts are split across two components, both hot-applied through
+# kglobalaccel (the only mechanism that applies without a re-login):
+#   Meta+Z -> KWin "Switch to Desktop 1" (Principal).
+#   Meta+X -> command shortcut net.local.dev-desktop.desktop/_launch, which
+#             enters Desarrollo and launches/reuses the dev kitty.
+# The dev command shortcut is registered (doRegister) and bound BEFORE Meta+X
+# is freed from KWin's "Switch to Desktop 2", so the key is never dead in
+# between. The result is verified by reading the shortcuts back; the script
+# exits non-zero if the readback does not match.
 #
 # Usage: bash kde/apply-desktops.sh
 set -euo pipefail
@@ -70,32 +77,72 @@ if [ "$seen" -lt "${#DESKTOP_NAMES[@]}" ]; then
   exit 1
 fi
 
-# 3) Bind the shortcuts. actionId needs 4 elements:
+# 3) Shortcuts. actionId needs 4 elements:
 #    componentUnique, actionUnique, componentFriendly, actionFriendly.
-for i in "${!DESKTOP_NAMES[@]}"; do
-  n=$((i + 1))
-  busctl --user call org.kde.kglobalaccel /kglobalaccel org.kde.KGlobalAccel \
-    setForeignShortcut asai 4 "kwin" "Switch to Desktop $n" "KWin" "Switch to Desktop $n" \
-    1 "${SHORTCUT_KEYS[$i]}" >/dev/null
-  echo "shortcut set: ${SHORTCUT_LABELS[$i]} -> Switch to Desktop $n"
-done
+DEV_COMPONENT="net.local.dev-desktop.desktop"
+DEV_ACTION="_launch"
+DEV_NAME="Kitty Dev (Desarrollo)"
 
-# 4) Verify: read the active keys back and fail loudly on mismatch
+# Meta+X -> dev command shortcut. Register the component first (a command
+# shortcut needs doRegister), then bind it hot. This happens BEFORE KWin's
+# "Switch to Desktop 2" is freed, so Meta+X is never unbound in between.
+busctl --user call org.kde.kglobalaccel /kglobalaccel org.kde.KGlobalAccel \
+  doRegister as 4 "$DEV_COMPONENT" "$DEV_ACTION" "$DEV_NAME" "$DEV_NAME" >/dev/null
+busctl --user call org.kde.kglobalaccel /kglobalaccel org.kde.KGlobalAccel \
+  setForeignShortcut asai 4 "$DEV_COMPONENT" "$DEV_ACTION" "$DEV_NAME" "$DEV_NAME" \
+  1 "${SHORTCUT_KEYS[1]}" >/dev/null
+echo "shortcut set: ${SHORTCUT_LABELS[1]} -> $DEV_NAME (command shortcut)"
+
+# Meta+Z stays on KWin desktop 1 (Principal).
+busctl --user call org.kde.kglobalaccel /kglobalaccel org.kde.KGlobalAccel \
+  setForeignShortcut asai 4 "kwin" "Switch to Desktop 1" "KWin" "Switch to Desktop 1" \
+  1 "${SHORTCUT_KEYS[0]}" >/dev/null
+echo "shortcut set: ${SHORTCUT_LABELS[0]} -> Switch to Desktop 1"
+
+# Free Meta+X from KWin desktop 2 (an empty key array unbinds it).
+busctl --user call org.kde.kglobalaccel /kglobalaccel org.kde.KGlobalAccel \
+  setForeignShortcut asai 4 "kwin" "Switch to Desktop 2" "KWin" "Switch to Desktop 2" \
+  0 >/dev/null
+echo "shortcut freed: Switch to Desktop 2"
+
+# 4) Verify: read the active keys back and fail loudly on mismatch.
 fail=0
-for i in "${!DESKTOP_NAMES[@]}"; do
-  n=$((i + 1))
-  action="Switch to Desktop $n"
-  block="$(qdbus6 --literal org.kde.kglobalaccel /component/kwin \
+
+read_action_block() {
+  local component="$1" action="$2"
+  qdbus6 --literal org.kde.kglobalaccel "/component/$component" \
     org.kde.kglobalaccel.Component.allShortcutInfos | tr ',' '\n' \
-    | grep -A9 "\"${action}\"" || true)"
-  if grep -q "ai {${SHORTCUT_KEYS[$i]}}" <<<"$block"; then
-    echo "verified: $action -> ${SHORTCUT_LABELS[$i]} (key ${SHORTCUT_KEYS[$i]})"
+    | grep -A9 "\"${action}\"" || true
+}
+
+expect_key() {
+  local component="$1" action="$2" label="$3" key="$4" block
+  block="$(read_action_block "$component" "$action")"
+  if grep -q "ai {${key}}" <<<"$block"; then
+    echo "verified: $label -> key ${key}"
   else
-    echo "ERROR: verification failed for '$action': expected active key ${SHORTCUT_KEYS[$i]} (${SHORTCUT_LABELS[$i]})" >&2
+    echo "ERROR: verification failed: '$label' is not bound to key ${key}" >&2
     echo "$block" >&2
     fail=1
   fi
-done
+}
+
+expect_no_key() {
+  local component="$1" action="$2" label="$3" key="$4" block
+  block="$(read_action_block "$component" "$action")"
+  if grep -q "ai {${key}}" <<<"$block"; then
+    echo "ERROR: verification failed: '$label' is still bound to key ${key}" >&2
+    echo "$block" >&2
+    fail=1
+  else
+    echo "verified: $label is free of key ${key}"
+  fi
+}
+
+expect_key "kwin" "Switch to Desktop 1" "${SHORTCUT_LABELS[0]} (Switch to Desktop 1)" "${SHORTCUT_KEYS[0]}"
+expect_key "net_local_dev_desktop_desktop" "$DEV_ACTION" "${SHORTCUT_LABELS[1]} ($DEV_NAME)" "${SHORTCUT_KEYS[1]}"
+expect_no_key "kwin" "Switch to Desktop 2" "Switch to Desktop 2" "${SHORTCUT_KEYS[1]}"
+
 if [ "$fail" -ne 0 ]; then
   echo "ERROR: shortcut verification failed; re-run or bind them in System Settings" >&2
   exit 1

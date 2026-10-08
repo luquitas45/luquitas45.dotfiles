@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Name=Kitty Dev (Desarrollo)
+Comment=Switch to Desarrollo and start or reuse the dev kitty
+Exec=/bin/sh -c "$HOME/.local/bin/dev-desktop"
+Icon=utilities-terminal
+Terminal=false
+StartupNotify=false
+NoDisplay=true
+X-KDE-GlobalAccel-CommandShortcut=true

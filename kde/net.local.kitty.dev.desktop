@@ -6,5 +6,4 @@ Exec=/bin/sh -c "$HOME/.local/bin/dev-kitty"
 Icon=utilities-terminal
 Terminal=false
 StartupNotify=false
-X-GNOME-Autostart-enabled=true
 Categories=System;TerminalEmulator;
