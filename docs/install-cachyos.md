@@ -50,7 +50,7 @@ bash kde/apply-wallpaper.sh    # fondo de pantalla versionado (a la actividad ac
 | Qué | Por qué | Doc |
 |---|---|---|
 | Layout del panel | los IDs de containment son por máquina | `kde/fancytasks-panel.md` |
-| Tema de SDDM (login) | vive en `/usr` y `/etc` (root) | `kde/README.md` |
+| Login (`plasmalogin`): fondo + tema | vive en `/usr`, `/etc` y `~plasmalogin` (root) | `kde/README.md` |
 | Plugin manager de tmux (TPM) | los plugins no están en el repo | abajo |
 | Widget FancyTasks (opcional) | hay que agregarlo al panel | `kde/fancytasks-panel.md` |
 
