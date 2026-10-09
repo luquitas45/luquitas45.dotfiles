@@ -46,7 +46,7 @@ que expande `$HOME`, así que no depende del PATH del proceso.
 | Sesión | Para | Plantilla |
 |---|---|---|
 | `SAPE` | Yakuake | `terminal` (shell) · `IA` (pi en ~/workspace) |
-| `dev` | kitty dev (Desarrollo) | `ws` paneles (nvim · shell · pi, ~/workspace) · `IA` (pi) |
+| `dev` | kitty dev (Desarrollo) | `ws` paneles (nvim arriba-izq · shell franja abajo · pi col. derecha, ~/workspace) · `IA` (pi) |
 
 ---
 

@@ -8,8 +8,8 @@
 #       2. "IA"       : pi in ~/workspace
 #   dev  (dev kitty in the Desarrollo desktop)
 #       1. "ws"        : paned window in ~/workspace
-#            left  : nvim (top, ~67%) + shell (bottom strip)
-#            right : pi (~33%, full height)
+#            left  : nvim (top) + shell (bottom strip, ~1/5 of the height)
+#            right : pi (~1/3 of the width, full height)
 #       2. "IA"       : pi in ~/workspace
 #
 # Used as the Command of the Yakuake profile and by kde/dev-kitty.sh, so the
@@ -40,9 +40,17 @@ if ! tmux has-session -t "$name" 2>/dev/null; then
       tmux new-session -d -s dev -c "$WS" >/dev/null
       tmux rename-window -t dev:1 ws >/dev/null
       # left column (big): nvim (top) + shell (bottom strip); right (small): pi.
-      tmux split-window -h -p 33 -t dev:1 -c "$WS" >/dev/null    # p2 = right column
-      tmux split-window -v -p 20 -t dev:1.1 -c "$WS" >/dev/null  # split pane 1 (left) -> p3 shell
+      tmux split-window -h -p 33 -t dev:1 -c "$WS" >/dev/null    # p3 = right column
+      tmux split-window -v -p 24 -t dev:1.1 -c "$WS" >/dev/null  # split pane 1 (left) -> p2 shell
       # After the splits the panes land as: 1=left-top, 2=left-bottom, 3=right.
+      # Pin the measured proportions the user settled on live (pi = a third of
+      # the window width, shell strip = a fifth of the content height; e.g.
+      # 100x27 / 100x7 / 50x35 on a 151x36 window). Percentages alone round
+      # short on tmux 3.7 (33% -> 49, 20% -> 6), so resize explicitly.
+      win_w=$(tmux display-message -p -t dev:1 '#{window_width}')
+      win_h=$(tmux display-message -p -t dev:1 '#{window_height}')
+      tmux resize-pane -t dev:1.3 -x "$((win_w / 3))" >/dev/null          # right: pi
+      tmux resize-pane -t dev:1.2 -y "$(((win_h - 1) / 5))" >/dev/null   # left-bottom: shell
       tmux send-keys -t dev:1.1 nvim Enter >/dev/null     # left-top: editor
       tmux send-keys -t dev:1.3 "$PI" Enter >/dev/null    # right column: pi
       tmux select-pane -t dev:1.1 >/dev/null               # left-bottom (1.2) stays a shell
