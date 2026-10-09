@@ -29,6 +29,7 @@ git clone https://github.com/luquitas45/luquitas45.dotfiles ~/dotfiles
 cd ~/dotfiles
 bash install.sh                # crea los symlinks (idempotente, nunca pisa archivos reales)
 bash kde/apply-gorgoroth.sh    # tema global + Kvantum + panel translúcido + blur
+bash kde/apply-wallpaper.sh    # fondo de pantalla versionado (a la actividad actual)
 # cerrar sesión y volver a entrar
 ```
 
@@ -109,3 +110,8 @@ kwriteconfig6 --file plasma-org.kde.plasma.desktop-appletsrc \
   `sh -c`) o un helper resuelto por PATH.
 - `config/nvim/` se linkea como directorio completo; los plugins viven en
   `~/.local/share/nvim` (fuera del repo).
+- El wallpaper vive en el repo (`plasma/wallpapers/gorgoroth.png`) y `install.sh`
+  lo linkea a `~/.local/share/wallpapers/gorgoroth.png`. `kde/apply-wallpaper.sh`
+  lo aplica a la actividad actual con `plasma-apply-wallpaperimage`; Plasma lo
+  direcciona por ruta absoluta, por eso se resuelve vía `$HOME` y nunca con un
+  `/home/<usuario>` hardcodeado.

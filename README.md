@@ -8,7 +8,8 @@ Configuración del entorno de `lucas` (CachyOS + KDE Plasma):
 - **yazi** — theme.toml Gorgoroth portado a yazi 26
 - **nvim** — LazyVim 16 con extras (picker, markdown/json/yaml/typescript, prettier), yazi.nvim y navegación tmux↔nvim
 - **pi** — tema Gorgoroth para Pi
-- **kde** — atajo global Meta+H → hojas de atajos (glow)
+- **kde** — atajo global Meta+H → hojas de atajos (glow), escritorios Principal/Desarrollo y kitty dev on-demand
+- **plasma** — desktop theme, color scheme y look-and-feel Gorgoroth, y el **wallpaper versionado** (`plasma/wallpapers/gorgoroth.png`)
 - **atajos/** — las hojas de atajos (`~/Documentos/atajos`, linkeadas como carpeta: nueva hoja = se versiona sola)
 - **curso-js/** — curso de JavaScript de Jon Mircha: vault de Obsidian (`~/alejandria/js-curso-jonmircha`, linkeado), ejercicios de práctica, skill del flujo Pi y memoria exportada
 
@@ -20,6 +21,7 @@ Guía completa (paquetes, pasos manuales, rollback): [`docs/install-cachyos.md`]
 cd ~/dotfiles
 bash install.sh                # symlinks (idempotente, nunca pisa archivos reales)
 bash kde/apply-gorgoroth.sh    # tema global + Kvantum + panel + blur, después relogin
+bash kde/apply-wallpaper.sh    # fondo de pantalla versionado (a la actividad actual)
 ```
 
 El primer script crea **symlinks** desde el repo hacia `$HOME` (el repo es la

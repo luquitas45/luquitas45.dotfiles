@@ -42,6 +42,7 @@ LINKS=(
   "kde/dev-desktop.sh|$HOME/.local/bin/dev-desktop"
   "plasma/desktoptheme/gorgoroth|$HOME/.local/share/plasma/desktoptheme/gorgoroth"
   "plasma/colorschemes/Gorgoroth.colors|$HOME/.local/share/color-schemes/Gorgoroth.colors"
+  "plasma/wallpapers/gorgoroth.png|$HOME/.local/share/wallpapers/gorgoroth.png"
   "kde/plasmoids/io.github.daydve.fancytasksng|$HOME/.local/share/plasma/plasmoids/io.github.daydve.fancytasksng"
   "kde/kwinrulesrc|$HOME/.config/kwinrulesrc"
   "plasma/look-and-feel/org.lucas.gorgoroth|$HOME/.local/share/plasma/look-and-feel/org.lucas.gorgoroth"
