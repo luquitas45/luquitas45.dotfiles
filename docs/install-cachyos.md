@@ -18,6 +18,8 @@ El repo versiona todo el look; lo que queda afuera son tres pasos manuales
 | `yakuake` | Terminal desplegable; su skin y el perfil de Konsole que usa están versionados |
 | `zoxide` | `z` (salto rápido a directorios) |
 | `glow` | Hojas de atajos del atajo global `Meta+H` |
+| `obsidian` | Abre el vault del repo (`~/alejandria/js-curso-jonmircha`) |
+| `jq` | `obsidian/register-vault.sh` lo usa para mergear el registro de vaults |
 
 La mayoría viene en CachyOS por defecto; `kvantum`, `yazi` y `glow` dependen de
 la edición que hayas instalado.
@@ -30,6 +32,7 @@ cd ~/dotfiles
 bash install.sh                # crea los symlinks (idempotente, nunca pisa archivos reales)
 bash kde/apply-gorgoroth.sh    # tema global + Kvantum + panel translúcido + blur
 bash kde/apply-wallpaper.sh    # fondo de pantalla versionado (a la actividad actual)
+bash obsidian/register-vault.sh  # con Obsidian CERRADO: lo apunta al vault del repo
 # cerrar sesión y volver a entrar
 ```
 
@@ -121,3 +124,11 @@ kwriteconfig6 --file plasma-org.kde.plasma.desktop-appletsrc \
   lo aplica a la actividad actual con `plasma-apply-wallpaperimage`; Plasma lo
   direcciona por ruta absoluta, por eso se resuelve vía `$HOME` y nunca con un
   `/home/<usuario>` hardcodeado.
+- **Obsidian**: `install.sh` linkea el vault `curso-js/vault` a
+  `~/alejandria/js-curso-jonmircha`. El registro de vaults de la app
+  (`~/.config/obsidian/obsidian.json`) guarda rutas **absolutas** y Obsidian lo
+  reescribe en runtime, así que no se versiona: `obsidian/register-vault.sh` lo
+  regenera por máquina (idempotente, `--check`, `--no-open`). Requiere Obsidian
+  **cerrado** porque la app pisa el archivo al salir. La config del vault
+  (`.obsidian/`, que cae en el repo vía el symlink) sí se versiona, salvo
+  `workspace.json` y `workspace-mobile.json` (ver `.gitignore`).

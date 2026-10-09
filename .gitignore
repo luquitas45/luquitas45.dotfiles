@@ -1,3 +1,9 @@
 *.swp
 *.bak
 .DS_Store
+
+# Obsidian vault state: rewritten on every panel move, pure churn.
+# The rest of curso-js/vault/.obsidian/ (app.json, hotkeys, plugins, snippets)
+# IS versioned — see README.md.
+curso-js/vault/.obsidian/workspace.json
+curso-js/vault/.obsidian/workspace-mobile.json
