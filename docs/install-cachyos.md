@@ -50,7 +50,7 @@ bash kde/apply-wallpaper.sh    # fondo de pantalla versionado (a la actividad ac
 | Qué | Por qué | Doc |
 |---|---|---|
 | Layout del panel | los IDs de containment son por máquina | `kde/fancytasks-panel.md` |
-| Login (`plasmalogin`): fondo + tema | vive en `/usr`, `/etc` y `~plasmalogin` (root) | `kde/README.md` |
+| Login (`plasmalogin`): fondo + tema | requiere root (`/usr`, `/etc`, `~plasmalogin`); script `kde/apply-login.sh` | `kde/README.md` |
 | Plugin manager de tmux (TPM) | los plugins no están en el repo | abajo |
 | Widget FancyTasks (opcional) | hay que agregarlo al panel | `kde/fancytasks-panel.md` |
 
@@ -59,6 +59,12 @@ TPM, una sola vez:
 ```bash
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 # dentro de tmux: prefijo (C-a) + I  instala navigator/resurrect/continuum
+```
+
+Login de Plasma (`plasmalogin`), root:
+
+```bash
+sudo bash kde/apply-login.sh    # fondo + tema Gorgoroth del login
 ```
 
 ## 4. Si `install.sh` reclama

@@ -219,73 +219,46 @@ Además el greeter no atraviesa el home del usuario (permisos 700): todo asset q
 use tiene que estar en un path **world-readable** (`/usr`, `/usr/local`). Los
 assets del repo ya viven ahí para el usuario; para el login hay que copiarlos.
 
-### Fondo
-
-Config en `/etc/plasmalogin.conf`, apuntando a una copia legible del PNG del repo:
+### Aplicar
 
 ```bash
-sudo install -Dm644 ~/dotfiles/plasma/wallpapers/gorgoroth.png \
-  /usr/local/share/wallpapers/gorgoroth.png
-sudo kwriteconfig6 --file /etc/plasmalogin.conf \
-  --group Greeter --key WallpaperPluginId org.kde.image
-sudo kwriteconfig6 --file /etc/plasmalogin.conf \
-  --group Greeter --group Wallpaper --group org.kde.image --group General \
-  --key Image file:///usr/local/share/wallpapers/gorgoroth.png
+sudo bash kde/apply-login.sh   # idempotente, con readback
 ```
 
-Queda así:
+`kde/apply-login.sh` copia los assets del repo a `/usr` y escribe la config del
+greeter. Se ve recién en el próximo login/reboot; **no** reinicies
+`plasmalogin.service` (te mata la sesión en curso).
 
-```ini
-[Greeter]
-WallpaperPluginId=org.kde.image
+Qué escribe (por si lo hacés a mano):
 
-[Greeter][Wallpaper][org.kde.image][General]
-Image=file:///usr/local/share/wallpapers/gorgoroth.png
-```
+- **Fondo** — `/etc/plasmalogin.conf`, con una copia legible del PNG en
+  `/usr/local/share/wallpapers/gorgoroth.png`:
 
-Va en `/etc/plasmalogin.conf` **directo**: los drop-ins en
-`/etc/plasmalogin.conf.d/` todavía no respetan el wallpaper. (El fondo también se
-puede elegir por GUI en Configuración del sistema → Pantalla de inicio de sesión.)
+  ```ini
+  [Greeter]
+  WallpaperPluginId=org.kde.image
 
-### Colores y Plasma style
+  [Greeter][Wallpaper][org.kde.image][General]
+  Image=file:///usr/local/share/wallpapers/gorgoroth.png
+  ```
 
-Mismo color scheme y desktop theme del repo, pero system-wide y en la config del
-greeter:
+  Va en `/etc/plasmalogin.conf` **directo**: los drop-ins en
+  `/etc/plasmalogin.conf.d/` todavía no respetan el wallpaper. (También se puede
+  elegir por GUI en Configuración del sistema → Pantalla de inicio de sesión.)
 
-```bash
-sudo install -Dm644 ~/dotfiles/plasma/colorschemes/Gorgoroth.colors \
-  /usr/share/color-schemes/Gorgoroth.colors
-sudo rm -rf /usr/share/plasma/desktoptheme/gorgoroth
-sudo cp -a ~/dotfiles/plasma/desktoptheme/gorgoroth /usr/share/plasma/desktoptheme/gorgoroth
-sudo chown -R root:root /usr/share/plasma/desktoptheme/gorgoroth
-
-sudo cp -a /var/lib/plasmalogin/.config/kdeglobals /var/lib/plasmalogin/.config/kdeglobals.bak
-sudo cp ~/dotfiles/plasma/colorschemes/Gorgoroth.colors /var/lib/plasmalogin/.config/kdeglobals
-sudo kwriteconfig6 --file /var/lib/plasmalogin/.config/kdeglobals --group General --key accentColor "#c1c1c1"
-sudo kwriteconfig6 --file /var/lib/plasmalogin/.config/kdeglobals --group General --key accentColorFromWallpaper false
-sudo kwriteconfig6 --file /var/lib/plasmalogin/.config/kdeglobals --group Icons --key Theme Papirus-Dark
-sudo kwriteconfig6 --file /var/lib/plasmalogin/.config/plasmarc --group Theme --key name gorgoroth
-sudo chown plasmalogin:plasmalogin /var/lib/plasmalogin/.config/kdeglobals /var/lib/plasmalogin/.config/plasmarc
-sudo chmod 600 /var/lib/plasmalogin/.config/kdeglobals /var/lib/plasmalogin/.config/plasmarc
-```
+- **Colores y Plasma style** — `Gorgoroth.colors` a `/usr/share/color-schemes/`,
+  `desktoptheme/gorgoroth` a `/usr/share/plasma/desktoptheme/`, y en la config del
+  greeter (`/var/lib/plasmalogin/.config/`): `kdeglobals` con el color scheme +
+  `accentColor=#c1c1c1` + `Icons Theme=Papirus-Dark`, y `plasmarc` con
+  `[Theme] name=gorgoroth`.
 
 > El `kdeglobals` del greeter usa exactamente los mismos grupos que el `.colors`,
-> por eso se puede copiar tal cual. **No** aplicar el `LookAndFeelPackage`
-> completo: un global theme arrastra su propio fondo y pisaría el wallpaper de
-> arriba. Solo copiamos color scheme + Plasma style, que es lo que el greeter pinta.
+> por eso se copia tal cual. **No** aplicar el `LookAndFeelPackage` completo: un
+> global theme arrastra su propio fondo y pisaría el wallpaper de arriba.
 >
 > Las herramientas `plasma-apply-colorscheme/-desktoptheme/-lookandfeel` **no**
 > sirven acá: son *session-aware* (consultan la sesión viva) y se niegan con
 > "ya se está usando en la sesión actual".
-
-Verificación (se ve recién en el próximo login/reboot; no reinicies
-`plasmalogin.service`, te mata la sesión):
-
-```bash
-kreadconfig6 --file /var/lib/plasmalogin/.config/kdeglobals --group General --key ColorScheme  # Gorgoroth
-kreadconfig6 --file /var/lib/plasmalogin/.config/plasmarc --group Theme --key name            # gorgoroth
-sudo -u plasmalogin test -r /usr/local/share/wallpapers/gorgoroth.png && echo "fondo OK"
-```
 
 ### Rollback
 
@@ -293,7 +266,7 @@ sudo -u plasmalogin test -r /usr/local/share/wallpapers/gorgoroth.png && echo "f
 sudo rm -f /usr/local/share/wallpapers/gorgoroth.png
 sudo rm -rf /usr/share/color-schemes/Gorgoroth.colors /usr/share/plasma/desktoptheme/gorgoroth
 sudo rm -f /var/lib/plasmalogin/.config/plasmarc
-# kdeglobals: restaurar kdeglobals.bak, o volver a Breeze Light desde Configuración del sistema
+# kdeglobals y /etc/plasmalogin.conf: restaurar los .bak.<timestamp> que crea el script
 ```
 
 La **pantalla de bloqueo** es otra superficie aparte: `~/.config/kscreenlockerrc`
