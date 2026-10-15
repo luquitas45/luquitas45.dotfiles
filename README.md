@@ -12,6 +12,7 @@ Configuración del entorno de `lucas` (CachyOS + KDE Plasma):
 - **plasma** — desktop theme, color scheme y look-and-feel Gorgoroth, y el **wallpaper versionado** (`plasma/wallpapers/gorgoroth.png`)
 - **atajos/** — las hojas de atajos (`~/Documentos/atajos`, linkeadas como carpeta: nueva hoja = se versiona sola)
 - **curso-js/** — curso de JavaScript de Jon Mircha: vault de Obsidian (`~/alejandria/js-curso-jonmircha`, linkeado), ejercicios de práctica, skill del flujo Pi y memoria exportada
+- **obsidian/** — registro reproducible del vault en el Obsidian local (`register-vault.sh`): la config del vault se versiona, el registro de la app se regenera por máquina
 
 ## Instalación
 
@@ -22,6 +23,7 @@ cd ~/dotfiles
 bash install.sh                # symlinks (idempotente, nunca pisa archivos reales)
 bash kde/apply-gorgoroth.sh    # tema global + Kvantum + panel + blur, después relogin
 bash kde/apply-wallpaper.sh    # fondo de pantalla versionado (a la actividad actual)
+bash obsidian/register-vault.sh  # con Obsidian CERRADO: lo apunta al vault del repo
 ```
 
 El primer script crea **symlinks** desde el repo hacia `$HOME` (el repo es la
@@ -46,5 +48,13 @@ todos los conflictos con la receta para resolverlos y no crea ningún link.
 - `~/Documentos/atajos/` es un symlink a `atajos/` del repo: las hojas de
   atajos (accesibles con Meta+H → glow) se versionan junto con el resto.
 - `Meta+H` funciona con cualquier home: el `.desktop` expande `$HOME` en runtime.
+- **Obsidian**: el vault vive en `curso-js/vault` y `install.sh` lo linkea a
+  `~/alejandria/js-curso-jonmircha`. La config del vault (`.obsidian/`, vía el
+  symlink) **sí** se versiona, salvo `workspace.json` y `workspace-mobile.json`,
+  que cambian en cada movimiento de panel. El registro de la app
+  (`~/.config/obsidian/obsidian.json`) **no** se versiona: guarda rutas absolutas
+  y Obsidian lo reescribe en runtime. `obsidian/register-vault.sh` lo regenera
+  por máquina, idempotente y con Obsidian cerrado. Tests:
+  `bash obsidian/test-register-vault.sh`.
 - `scripts/check-portable.sh` falla si un archivo machine-read hardcodea
   `/home/<usuario>`.

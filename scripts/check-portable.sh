@@ -4,6 +4,8 @@
 # Exemptions (never read as a path at runtime):
 #   - documentation (*.md): may quote paths as examples
 #   - this script (it contains the search pattern itself)
+#   - obsidian/test-register-vault.sh: asserts the pattern is absent, so it must
+#     contain the pattern itself
 #   - comment lines (leading #, after file:line:)
 #   - Inkscape export metadata (inkscape:export-filename=...) inside SVG assets
 #
@@ -13,7 +15,7 @@ cd "$(dirname "${BASH_SOURCE[0]}")/.."
 
 offenders="$(
   git ls-files -z \
-    | grep -zvE '(\.md|^scripts/check-portable\.sh)$' \
+    | grep -zvE '(\.md|^scripts/check-portable\.sh|^obsidian/test-register-vault\.sh)$' \
     | xargs -0 grep -In '/home/' 2>/dev/null \
     | grep -v 'inkscape:export-filename' \
     | grep -vE '^[^:]+:[0-9]+:[[:space:]]*#' \

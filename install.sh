@@ -188,4 +188,5 @@ fi
 echo ""
 echo "All links ready. Open a new shell (and a new tmux/kitty session) to pick them up."
 echo "Next: bash kde/apply-gorgoroth.sh   (global theme + Kvantum + panel + blur, then relogin)"
+echo "Next: bash obsidian/register-vault.sh   (point a CLOSED Obsidian at ~/alejandria/js-curso-jonmircha)"
 echo "Docs: docs/install-cachyos.md"
